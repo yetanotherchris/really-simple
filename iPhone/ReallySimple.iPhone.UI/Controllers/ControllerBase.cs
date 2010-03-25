@@ -121,15 +121,13 @@ namespace ReallySimple.iPhone.UI.Controllers
 		private void AddSettingsButtons(BindingContext bindingContext)
 		{
 			_containerView = new UIView();
-			_containerView.Frame = new RectangleF(10,320,300,100);
+			_containerView.Frame = new RectangleF(10,280,300,100);
 			
 			// Add send email button
 			_emailButton = UIButton.FromType(UIButtonType.RoundedRect);
-			_emailButton.Frame = new RectangleF(10,100,300,40);
+			_emailButton.Frame = new RectangleF(10,0,300,40);
 			_emailButton.SetTitle("Send error report by email",UIControlState.Normal);
 			_emailButton.HorizontalAlignment = UIControlContentHorizontalAlignment.Left;
-			_emailButton.SetTitleColor(UIColor.Black,UIControlState.Normal);
-			_emailButton.
 			_emailButton.TouchDown += delegate
 			{
 				
@@ -162,7 +160,7 @@ namespace ReallySimple.iPhone.UI.Controllers
 			
 			// Debug details (disabled for release builds)
 			_debugButton = UIButton.FromType(UIButtonType.RoundedRect);
-			_debugButton.Frame = new RectangleF(10,55,300,40);
+			_debugButton.Frame = new RectangleF(10,45,300,40);
 			_debugButton.SetTitle(" Debug information",UIControlState.Normal);
 			_debugButton.HorizontalAlignment = UIControlContentHorizontalAlignment.Left;
 			_debugButton.TouchDown += delegate
