@@ -37,7 +37,7 @@ namespace ReallySimple.iPhone.UI
 			Settings.Current.Read();		
 			
 			stopwatch.Stop();
-			Logger.WriteLine("StartupLoader.LoadSettings took {0}ms",stopwatch.ElapsedMilliseconds);
+			Logger.Info("StartupLoader.LoadSettings took {0}ms",stopwatch.ElapsedMilliseconds);
 		}
 
 		public void LoadCategories()
@@ -48,7 +48,7 @@ namespace ReallySimple.iPhone.UI
 			Repository.Default.ListCategories();
 
 			stopwatch.Stop();
-			Logger.WriteLine("StartupLoader.LoadCategories took {0}ms", stopwatch.ElapsedMilliseconds);
+			Logger.Info("StartupLoader.LoadCategories took {0}ms", stopwatch.ElapsedMilliseconds);
 		}
 
 		public void LoadItems()
@@ -59,7 +59,7 @@ namespace ReallySimple.iPhone.UI
 			Repository.Default.ListItems();
 
 			stopwatch.Stop();
-			Logger.WriteLine("StartupLoader.LoadItems took {0}ms", stopwatch.ElapsedMilliseconds);
+			Logger.Info("StartupLoader.LoadItems took {0}ms", stopwatch.ElapsedMilliseconds);
 		}
 
 		public void LoadSites()
@@ -70,7 +70,7 @@ namespace ReallySimple.iPhone.UI
 			Repository.Default.ListSites();
 
 			stopwatch.Stop();
-			Logger.WriteLine("StartupLoader.LoadSites took {0}ms", stopwatch.ElapsedMilliseconds);
+			Logger.Info("StartupLoader.LoadSites took {0}ms", stopwatch.ElapsedMilliseconds);
 		}
 
 		public void LoadHtmlTemplates()
@@ -81,7 +81,7 @@ namespace ReallySimple.iPhone.UI
 			HtmlTemplate.Initialize();
 
 			stopwatch.Stop();
-			Logger.WriteLine("StartupLoader.LoadHtmlTemplates took {0}ms", stopwatch.ElapsedMilliseconds);
+			Logger.Info("StartupLoader.LoadHtmlTemplates took {0}ms", stopwatch.ElapsedMilliseconds);
 		}
 		
 		public void ClearOldItems()

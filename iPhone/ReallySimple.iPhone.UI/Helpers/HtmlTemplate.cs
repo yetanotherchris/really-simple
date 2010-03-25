@@ -32,7 +32,7 @@ namespace ReallySimple.iPhone.UI
 			}
 			catch (IOException e)
 			{
-				Logger.WriteLine("An error occured reading the HTML templates: \n{0}", e);
+				Logger.Warn("An error occured reading the HTML templates: \n{0}", e);
 			}
 		}
 		

@@ -121,27 +121,17 @@ namespace ReallySimple.iPhone.Core
 		{
 			List<Item> items = new List<Item>();
 
-			var allItems = Repository.Default.ListItems();
-			switch (Settings.Current.UserSettings.SortItemsBy)
-			{
-				case SortBy.Site:
-					allItems = allItems.SortBySite();
-					break;
-
-				case SortBy.Date:
-				default:
-					allItems = allItems.SortByDate();
-					break;
-			}
+			List<Item> allItems = Repository.Default.ListItems().ToList();
+			allItems = SortItems(allItems);			
 			
-            // 7 images from the selected categories
+            // 5 images from the selected categories
             foreach (Category category in Settings.Current.LastCategories)
             {
                var catItems = allItems.Where(i =>
                     i.Feed.Category.Id.Equals(category.Id) &&
                     !i.ImageDownloaded &&
                     !string.IsNullOrEmpty(i.ImageUrl))
-                    .Take(7);
+                    .Take(5);
 
                items.AddRange(catItems);
             }
@@ -159,6 +149,19 @@ namespace ReallySimple.iPhone.Core
 			}
 		}
 
+		private List<Item> SortItems(List<Item> items)
+		{
+			switch (Settings.Current.UserSettings.SortItemsBy)
+			{
+				case SortBy.Site:
+					return items.SortBySite();
+
+				case SortBy.Date:
+				default:
+					return items.SortByDate();
+			}
+		}
+
 		public void BackgroundDownload()
 		{
 			if (_isWorking)
@@ -166,11 +169,25 @@ namespace ReallySimple.iPhone.Core
 			
 			List<Item> items = Repository.Default.ListItems().Where(i => !i.ImageDownloaded && !string.IsNullOrEmpty(i.ImageUrl)).ToList();
 
+			// Sort so the selected categories get the images first
+			IList<Item> categoryItems = new List<Item>();
+			IList<Item> otherItems = new List<Item>();
+			foreach (Category category in Settings.Current.LastCategories)
+			{
+				categoryItems = items.Where(i => i.Feed.Category.Equals(category)).ToList();
+				otherItems = items.Where(i => !i.Feed.Category.Equals(category)).ToList();
+				break;
+			}
+
+			List<Item> sortedItems = new List<Item>();
+			sortedItems.AddRange(categoryItems);
+			sortedItems.AddRange(otherItems);
+
             if (items.Count > 0)
             {
 				_thread = new Thread(delegate()
 				{
-					QueueDownloads(items);
+					QueueDownloads(sortedItems);
 				});
                 _thread.Name = string.Format("Parent download thread");
                 _thread.Start(items);
@@ -208,7 +225,7 @@ namespace ReallySimple.iPhone.Core
                         bool success = _waithandle.WaitOne(_timeout);
 
                         if (!success)
-                            Logger.WriteLine("[Warning] ImageDownloader WaitOne timed out for {0}", items[i].Id);
+                            Logger.Info("[Warning] ImageDownloader WaitOne timed out for {0}", items[i].Id);
 
                         // Call regardless of success
                         OnImageSaved(EventArgs.Empty);
@@ -216,7 +233,7 @@ namespace ReallySimple.iPhone.Core
                 }
                 catch (Exception ex)
                 {
-                    Logger.WriteLine("Exception in ImageDownloader.DownloadStart: {0}", ex.ToString());
+                    Logger.Warn("Exception in ImageDownloader.DownloadStart: {0}", ex.ToString());
                 }
                 finally
                 {
@@ -251,20 +268,20 @@ namespace ReallySimple.iPhone.Core
 				client.DownloadFile(item.ImageUrl, fullPath);
 
 				item.SetImageDownloaded();
-				Logger.WriteLine("Saved image {0}", Path.GetFileName(item.ImageFilename));
+				Logger.Info("Saved image {0}", Path.GetFileName(item.ImageFilename));
 			}
 			catch (WebException e)
 			{
-				Logger.WriteLine("WebException downloading an image: {0}", e);
+				Logger.Warn("WebException downloading an image: {0}", e);
 			}
 			catch (ArgumentException e)
 			{
 				// For Path
-				Logger.WriteLine("ArgumentException downloading an image: {0}", e);
+				Logger.Warn("ArgumentException downloading an image: {0}", e);
 			}
 			catch (Exception e)
 			{
-				Logger.WriteLine("General Exception when downloading an image: {0}", e);
+				Logger.Warn("General Exception when downloading an image: {0}", e);
 			}
 		}
 

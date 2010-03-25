@@ -66,7 +66,7 @@ namespace ReallySimple.iPhone.UI.Controllers
 		
 		public override void ViewDidAppear (bool animated)
 		{
-			base.ViewDidAppear (animated);
+			base.ViewDidAppear(animated);
 			
 			// Persist the controller name for next load
 			Settings.Current.LastControllerId = ControllerId;
@@ -85,7 +85,7 @@ namespace ReallySimple.iPhone.UI.Controllers
 			_informationButton.Clicked += delegate
 			{
 				InformationController controller = new InformationController();
-				NavigationController.PushViewController(controller,false);
+				NavigationController.PushViewController(controller,true);
 			};
 			
 			// Two spacers to go between each icon
@@ -115,7 +115,7 @@ namespace ReallySimple.iPhone.UI.Controllers
 				}
 			};
 
-			NavigationController.PushViewController(_settingsController, false);
+			NavigationController.PushViewController(_settingsController, true);
 		}
 			
 		private void AddSettingsButtons(BindingContext bindingContext)

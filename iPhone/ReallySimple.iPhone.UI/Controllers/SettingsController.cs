@@ -61,7 +61,7 @@ namespace ReallySimple.iPhone.UI.Controllers
 			_doneButton.Clicked += delegate(object sender, EventArgs e) 
 			{
 				_pickCategories = new PickCategoriesController();
-				NavigationController.PushViewController(_pickCategories, false);
+				NavigationController.PushViewController(_pickCategories, true);
 			};
 			
 			// Clear cache

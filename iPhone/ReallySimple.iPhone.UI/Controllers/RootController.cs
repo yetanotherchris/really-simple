@@ -24,9 +24,16 @@ namespace ReallySimple.iPhone.UI.Controllers
 			NavigationBar.BarStyle = UIBarStyle.Black;
 
 			// Use any saved controller
+			var viewControllers = ViewControllers.ToList();
 			switch (Settings.Current.LastControllerId)
 			{
 				case "Information":
+					// Add the PickCategories to the stack for the back button
+					_pickCategories = new PickCategoriesController();
+
+					viewControllers.Add(_pickCategories);
+					ViewControllers = viewControllers.ToArray();
+
 					_controller = new InformationController();
 					break;
 				
@@ -35,7 +42,6 @@ namespace ReallySimple.iPhone.UI.Controllers
 					// Add the PickCategories to the stack
 					_pickCategories = new PickCategoriesController();
 				
-					var viewControllers = ViewControllers.ToList();
 					viewControllers.Add(_pickCategories);
 					ViewControllers = viewControllers.ToArray();
 
@@ -49,7 +55,7 @@ namespace ReallySimple.iPhone.UI.Controllers
 					break;
 			}
 
-			PushViewController(_controller, false);
+			PushViewController(_controller, true);
 		}
 	}
 }

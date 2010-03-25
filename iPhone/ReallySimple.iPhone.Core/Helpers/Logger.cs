@@ -11,17 +11,36 @@ namespace ReallySimple.iPhone.Core
 	/// </summary>
 	public class Logger
 	{
+		public static void Info(string format, params object[] args)
+		{
+			WriteLine(LoggingLevel.Info,format,args);
+		}
+
+		public static void Warn(string format, params object[] args)
+		{
+			WriteLine(LoggingLevel.Warn,format,args);
+		}
+
+		public static void Fatal(string format, params object[] args)
+		{
+			WriteLine(LoggingLevel.Fatal,format,args);
+		}
+
 		/// <summary>
 		/// Writes the args to the default logging output using the format provided.
 		/// </summary>
-		public static void WriteLine(string format,params object[] args)
+		public static void WriteLine(LoggingLevel level,string format, params object[] args)
 		{
-			var name = new StackFrame(1,false).GetMethod().Name;
-			string message = string.Format("(" + name + ") " + format, args);
-
 #if LOGGING
-			WriteToFile(message);
+			var name = new StackFrame(1,false).GetMethod().Name;
+
+			string prefix = string.Format("[{0} - {1}] ",level,name);
+			string message = string.Format(prefix + format, args);
+
 			Console.WriteLine(message);
+
+			if (level != LoggingLevel.Info)
+				WriteToFile(message);
 #endif
 		}
 
@@ -35,5 +54,12 @@ namespace ReallySimple.iPhone.Core
 			{
 			}
 		}
+	}
+
+	public enum LoggingLevel
+	{
+		Info,
+		Warn,
+		Fatal
 	}
 }

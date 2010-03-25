@@ -130,7 +130,7 @@ namespace ReallySimple.iPhone.Core
 			}
 			catch (IOException e)
 			{
-				Logger.WriteLine("An IOException occured while creating the image cache folder: \n{0}", e);
+				Logger.Warn("An IOException occured while creating the image cache folder: \n{0}", e);
 			}
 		}
 
@@ -190,7 +190,7 @@ namespace ReallySimple.iPhone.Core
 					}
 					catch (Exception ex)
 					{
-						Logger.WriteLine("Error reading lastCategories in Settings: {0}", ex.ToString());
+						Logger.Warn("Error reading lastCategories in Settings: {0}", ex.ToString());
 					}
 				}
 
@@ -230,7 +230,7 @@ namespace ReallySimple.iPhone.Core
 			}
 			catch (Exception e)
 			{
-				Logger.WriteLine("An exception occured while reading the settings: \n{0}", e);
+				Logger.Warn("An exception occured while reading the settings: \n{0}", e);
 			}
 		}
 
@@ -264,7 +264,7 @@ namespace ReallySimple.iPhone.Core
 			}
 			catch (Exception e)
 			{
-				Logger.WriteLine("An exception occured while writing the settings: \n{0}", e);
+				Logger.Warn("An exception occured while writing the settings: \n{0}", e);
 			}
 		} 
 		#endregion
@@ -296,13 +296,13 @@ namespace ReallySimple.iPhone.Core
 					}
 					catch (IOException e)
 					{
-						Logger.WriteLine("IOException deleting {0}: {1}", ImageFolder, e.Message);
+						Logger.Warn("IOException deleting {0}: {1}", ImageFolder, e.Message);
 					}
 				}
 			}
 			catch (IOException e)
 			{
-				Logger.WriteLine("An exception occured while clearing the image cache folder: \n{0}", e);
+				Logger.Warn("An exception occured while clearing the image cache folder: \n{0}", e);
 			}
 		}
 

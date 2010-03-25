@@ -70,7 +70,7 @@ namespace ReallySimple.iPhone.Core.Remote
 			int timeout = Settings.Current.UserSettings.GetFetchTimeout();
 			bool terminatedOk = _thread.Join(timeout * 1000);
 			if (!terminatedOk)
-				Logger.WriteLine("The timeout of {0} seconds was reached when downloading the latest feeds", timeout);
+				Logger.Info("The timeout of {0} seconds was reached when downloading the latest feeds", timeout);
 
 			return list;
 		}
@@ -86,7 +86,7 @@ namespace ReallySimple.iPhone.Core.Remote
 					// Get the url we need for the number of hours since the update
 					string url = Settings.Current.GetUpdateUrl();
 					HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(url);
-					Logger.WriteLine("Using {0} for the feeds.", url);
+					Logger.Info("Using {0} for the feeds.", url);
 
 					// Get the zip file, and decompress and de-serialize
 					using (HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse())
@@ -103,18 +103,18 @@ namespace ReallySimple.iPhone.Core.Remote
 				}
 				catch (WebException e)
 				{
-					Logger.WriteLine("A WebException occured downloading the latest feeds: {0}", e);
+					Logger.Warn("A WebException occured downloading the latest feeds: {0}", e);
 					return list;
 				}
 				catch (IOException e)
 				{
-					Logger.WriteLine("An IOException occured downloading the latest feeds: {0}", e);
+					Logger.Warn("An IOException occured downloading the latest feeds: {0}", e);
 					return list;
 				}
 				catch (Exception e)
 				{
 					// Catch XmlSerializer errors
-					Logger.WriteLine("A general exception occured downloading the latest feeds: {0}", e);
+					Logger.Warn("A general exception occured downloading the latest feeds: {0}", e);
 					return list;
 				}
 			}
@@ -158,7 +158,7 @@ namespace ReallySimple.iPhone.Core.Remote
 					}
 					catch (SqliteException e)
 					{
-						Logger.WriteLine("An error occured committing the save transaction on new items:{0}", e);
+						Logger.Warn("An error occured committing the save transaction on new items:{0}", e);
 						transaction.Rollback();
 					}
 				}

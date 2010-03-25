@@ -39,7 +39,7 @@ namespace ReallySimple.iPhone.Core
 			}
 			catch (IOException e)
 			{
-				Logger.WriteLine("Unable to create the items database: \n{0}", e);
+				Logger.Fatal("Unable to create the items database: \n{0}", e);
 			}
 		}
 		
@@ -114,7 +114,7 @@ namespace ReallySimple.iPhone.Core
 			}
 			catch (SqliteException e)
 			{
-				Logger.WriteLine("SqliteException occured while listing categories: \n{0}",e);
+				Logger.Warn("SqliteException occured while listing categories: \n{0}",e);
 			}
 
 			CategoryCache.Current.Update(list);
@@ -177,7 +177,7 @@ namespace ReallySimple.iPhone.Core
 			}
 			catch (SqliteException e)
 			{
-				Logger.WriteLine("SqliteException occured while listing feeds: \n{0}", e);
+				Logger.Warn("SqliteException occured while listing feeds: \n{0}", e);
 			}
 			
 			FeedCache.Current.Update(list);
@@ -237,7 +237,7 @@ namespace ReallySimple.iPhone.Core
 			}
 			catch (SqliteException e)
 			{
-				Logger.WriteLine("SqliteException occured while listing sites: \n{0}", e);
+				Logger.Warn("SqliteException occured while listing sites: \n{0}", e);
 			}
 			
 			SiteCache.Current.Update(list);
@@ -358,7 +358,7 @@ namespace ReallySimple.iPhone.Core
 			}
 			catch (SqliteException e)
 			{
-				Logger.WriteLine("SqliteException occured while saving an item {0}: \n{1}", item.Link,e);
+				Logger.Warn("SqliteException occured while saving an item {0}: \n{1}", item.Link,e);
 			}
 		}
 
@@ -389,7 +389,7 @@ namespace ReallySimple.iPhone.Core
 			}
 			catch (SqliteException e)
 			{
-				Logger.WriteLine("SqliteException occured while listing performing UpdateItemImage for {0}: \n{1}", item.Link,e);
+				Logger.Warn("SqliteException occured while listing performing UpdateItemImage for {0}: \n{1}", item.Link,e);
 			}
 			
 			item.ImageDownloaded = true;
@@ -455,7 +455,7 @@ namespace ReallySimple.iPhone.Core
 			}
 			catch (SqliteException e)
 			{
-				Logger.WriteLine("SqliteException occured while listing items: \n{0}", e);
+				Logger.Warn("SqliteException occured while listing items: \n{0}", e);
 			}
 			
 			ItemCache.Current.Update(list);
@@ -473,7 +473,7 @@ namespace ReallySimple.iPhone.Core
 
 			if (filtered == null)
 			{
-				Logger.WriteLine("ItemsForCategories - the filtered list is null.");
+				Logger.Warn("ItemsForCategories - the filtered list is null.");
 				return new List<Item>();
 			}
 		
@@ -515,7 +515,7 @@ namespace ReallySimple.iPhone.Core
 				}
 				catch (SqliteException e)
 				{
-					Logger.WriteLine("SqliteException occured while lazy loading item {0}: \n{1}", item.Link, e);
+					Logger.Warn("SqliteException occured while lazy loading item {0}: \n{1}", item.Link, e);
 				}
 			}
 		}
@@ -549,7 +549,7 @@ namespace ReallySimple.iPhone.Core
 			}
 			catch (SqliteException e)
 			{
-				Logger.WriteLine("SqliteException occured while updating read status of item {0}: \n{1}", item.Link, e);
+				Logger.Warn("SqliteException occured while updating read status of item {0}: \n{1}", item.Link, e);
 			}
 		}
 		
@@ -575,7 +575,7 @@ namespace ReallySimple.iPhone.Core
 			}
 			catch (SqliteException e)
 			{
-				Logger.WriteLine("SqliteException occured while clearing items before {0}: \n{1}", date, e);
+				Logger.Warn("SqliteException occured while clearing items before {0}: \n{1}", date, e);
 			}
 		}
 		#endregion
