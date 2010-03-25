@@ -1,0 +1,9 @@
+OPEN update.rlysimple.com
+rlysimpleupdate
+Update44!
+cd /httpdocs
+put 3.bin.gz
+put 6.bin.gz
+put 12.bin.gz
+put 24.bin.gz
+quit

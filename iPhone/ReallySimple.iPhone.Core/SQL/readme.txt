@@ -1,0 +1,1 @@
+Data needs to be imported manually. Sqlite manager can do this alongside SQL server dumper and a few tweaks.

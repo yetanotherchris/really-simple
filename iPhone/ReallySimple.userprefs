@@ -1,0 +1,29 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" ctype="Workspace" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="ReallySimple.iPhone.Core/Settings/UserSettings.cs" ctype="Workbench">
+    <Files>
+      <File FileName="ReallySimple.iPhone.Core/Settings/UserSettings.cs" Line="29" Column="18" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="ReallySimple.iPhone.Core" expanded="True">
+            <Node name="References" expanded="True" />
+            <Node name="Settings" expanded="True">
+              <Node name="UserSettings.cs" selected="True" />
+            </Node>
+          </Node>
+          <Node name="ReallySimple.iPhone.UI" expanded="True">
+            <Node name="References" expanded="True" />
+            <Node name="Helpers" expanded="True" />
+            <Node name="lib" expanded="True" />
+            <Node name="Views" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+</Properties>
