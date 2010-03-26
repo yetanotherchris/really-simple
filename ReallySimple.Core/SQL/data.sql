@@ -67,7 +67,7 @@ INSERT INTO feeds (id, categoryid, siteid, url, [type], lastupdate, cleaner) VAL
 INSERT INTO feeds (id, categoryid, siteid, url, [type], lastupdate, cleaner) VALUES ('6E7194DB-2C7F-4561-A03E-31BD76B14390', 'D7E484AC-BFF5-4D40-882E-6E935B9ACE05', '78FB160C-97FE-46C1-9532-12FBC29D65AA', 'http://www.engadget.com/rss.xml', 1, NULL, '');
 INSERT INTO feeds (id, categoryid, siteid, url, [type], lastupdate, cleaner) VALUES ('3D995A3A-B418-48BC-AE72-4986F3909264', 'D7E484AC-BFF5-4D40-882E-6E935B9ACE05', '2C3EDA7B-CC93-457C-BDD7-782AC615A9E0', 'http://rss.slashdot.org/Slashdot/classic', 2, NULL, '');
 INSERT INTO feeds (id, categoryid, siteid, url, [type], lastupdate, cleaner) VALUES ('929F4EB3-F471-49B8-9324-4D3B264B1BD2', 'D7E484AC-BFF5-4D40-882E-6E935B9ACE05', '3A3FCEA3-31CF-49A0-A685-52032319627F', 'http://www.techeblog.com/elephant/?mode=atom', 3, NULL, '');
-INSERT INTO feeds (id, categoryid, siteid, url, [type], lastupdate, cleaner) VALUES ('CD63988E-AC17-4EDB-9DBD-437946AE1341', 'D7E484AC-BFF5-4D40-882E-6E935B9ACE05', '8FB41C88-0ED3-4E9F-A0DC-C2595507247B', 'http://feeds.feedburner.com/yankodesig', 1, NULL, '');
+INSERT INTO feeds (id, categoryid, siteid, url, [type], lastupdate, cleaner) VALUES ('CD63988E-AC17-4EDB-9DBD-437946AE1341', 'D7E484AC-BFF5-4D40-882E-6E935B9ACE05', '8FB41C88-0ED3-4E9F-A0DC-C2595507247B', 'http://feeds.feedburner.com/yankodesign', 1, NULL, '');
 INSERT INTO feeds (id, categoryid, siteid, url, [type], lastupdate, cleaner) VALUES ('52831EF0-C453-4EE0-A9C1-35DD4EDA4031', '0F385B3E-ABC0-4C73-8FE2-0C46E6133E6E', '88A3E341-CD3D-4053-8352-8C4C58945840', 'http://feeds.concierge.com/ConciergeTravelFeatures', 1, NULL, '');
 INSERT INTO feeds (id, categoryid, siteid, url, [type], lastupdate, cleaner) VALUES ('F1463FD4-0F41-4F3B-AF0C-D3574B98FA31', '0F385B3E-ABC0-4C73-8FE2-0C46E6133E6E', '0A300B6D-64EC-403A-BE1E-047E40FB6EFA', 'http://feeds2.feedburner.com/fodors/travel-news', 1, NULL, '');
 INSERT INTO feeds (id, categoryid, siteid, url, [type], lastupdate, cleaner) VALUES ('476DA1F2-FC9D-4245-8A01-7E64F670C33D', '0F385B3E-ABC0-4C73-8FE2-0C46E6133E6E', 'D78C71F0-CBE7-4846-9930-485E574B259A', 'http://inside-digital.blog.lonelyplanet.com/feed/', 1, NULL, '');
@@ -126,7 +126,7 @@ INSERT INTO sites (id, url, title) VALUES ('0679E8C0-FECD-4175-A96D-3D7C6BD06653
 INSERT INTO sites (id, url, title) VALUES ('78FB160C-97FE-46C1-9532-12FBC29D65AA', 'http://www.engadget.com', 'Engadget');
 INSERT INTO sites (id, url, title) VALUES ('2C3EDA7B-CC93-457C-BDD7-782AC615A9E0', 'http://www.slashdot.org', 'Slashdot');
 INSERT INTO sites (id, url, title) VALUES ('3A3FCEA3-31CF-49A0-A685-52032319627F', 'http://www.techeblog.com', 'Techeblog');
-INSERT INTO sites (id, url, title) VALUES ('8FB41C88-0ED3-4E9F-A0DC-C2595507247B', 'http://www.yankodesign.com', 'Yanko Desig');
+INSERT INTO sites (id, url, title) VALUES ('8FB41C88-0ED3-4E9F-A0DC-C2595507247B', 'http://www.yankodesign.com', 'Yanko Design');
 INSERT INTO sites (id, url, title) VALUES ('88A3E341-CD3D-4053-8352-8C4C58945840', 'http://www.concierge.com', 'Concierge.com');
 INSERT INTO sites (id, url, title) VALUES ('0A300B6D-64EC-403A-BE1E-047E40FB6EFA', 'http://www.fodors.com', 'Fodor''s');
 INSERT INTO sites (id, url, title) VALUES ('D78C71F0-CBE7-4846-9930-485E574B259A', 'http://www.lonelyplanet.com', 'Lonely Planet');
