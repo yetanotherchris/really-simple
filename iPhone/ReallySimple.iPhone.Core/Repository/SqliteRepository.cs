@@ -420,7 +420,7 @@ namespace ReallySimple.iPhone.Core
 					using (SqliteCommand command = new SqliteCommand(connection))
 					{
 						// The minimum we can load
-						string sql = "SELECT id,feedid,isread,link,imageDownloaded,imageUrl FROM items ";
+						string sql = "SELECT id,feedid,isread,link,publishDate,imageDownloaded,imageUrl FROM items ";
 
 						if (Settings.Current.UserSettings.IgnoreReadItems)
 							sql += "WHERE isread=0 ";
@@ -437,8 +437,9 @@ namespace ReallySimple.iPhone.Core
 								Guid feedId = reader.GetGuid(1);
 								item.IsRead = reader.GetBoolean(2);
 								item.Link = reader.GetString(3);
-								item.ImageDownloaded = reader.GetBoolean(4);
-								item.ImageUrl = reader.GetString(5);
+								item.PublishDate = reader.GetDateTime(4);
+								item.ImageDownloaded = reader.GetBoolean(5);
+								item.ImageUrl = reader.GetString(6);
 
 								// This ensures that removed feeds are ignored.
 								Feed feed = allFeeds.FirstOrDefault(f => f.Id.Equals(feedId));

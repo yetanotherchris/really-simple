@@ -126,8 +126,8 @@ namespace ReallySimple.iPhone.UI.Controllers
 			// Add send email button
 			_emailButton = UIButton.FromType(UIButtonType.RoundedRect);
 			_emailButton.Frame = new RectangleF(10,0,300,40);
-			_emailButton.SetTitle("Send error report by email",UIControlState.Normal);
-			_emailButton.HorizontalAlignment = UIControlContentHorizontalAlignment.Left;
+			_emailButton.SetTitle("  Send error report by email",UIControlState.Normal);
+			_emailButton.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
 			_emailButton.TouchDown += delegate
 			{
 				
@@ -162,7 +162,7 @@ namespace ReallySimple.iPhone.UI.Controllers
 			_debugButton = UIButton.FromType(UIButtonType.RoundedRect);
 			_debugButton.Frame = new RectangleF(10,45,300,40);
 			_debugButton.SetTitle(" Debug information",UIControlState.Normal);
-			_debugButton.HorizontalAlignment = UIControlContentHorizontalAlignment.Left;
+			_debugButton.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
 			_debugButton.TouchDown += delegate
 			{
 				ModalDialog.Alert("Debug",DebugInfo());	
@@ -201,15 +201,6 @@ namespace ReallySimple.iPhone.UI.Controllers
 		
 		void HandleMailFinished(object sender, MFComposeResultEventArgs e)
 		{
-			if (e.Result == MFMailComposeResult.Sent)
-			{
-				
-			}
-			else if (e.Result != MFMailComposeResult.Sent)
-			{
-				
-			}
-			
 			e.Controller.DismissModalViewControllerAnimated(true);
 		}
 		

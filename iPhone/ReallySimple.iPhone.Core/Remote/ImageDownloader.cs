@@ -149,19 +149,6 @@ namespace ReallySimple.iPhone.Core
 			}
 		}
 
-		private List<Item> SortItems(List<Item> items)
-		{
-			switch (Settings.Current.UserSettings.SortItemsBy)
-			{
-				case SortBy.Site:
-					return items.SortBySite();
-
-				case SortBy.Date:
-				default:
-					return items.SortByDate();
-			}
-		}
-
 		public void BackgroundDownload()
 		{
 			if (_isWorking)
@@ -170,8 +157,8 @@ namespace ReallySimple.iPhone.Core
 			List<Item> items = Repository.Default.ListItems().Where(i => !i.ImageDownloaded && !string.IsNullOrEmpty(i.ImageUrl)).ToList();
 
 			// Sort so the selected categories get the images first
-			IList<Item> categoryItems = new List<Item>();
-			IList<Item> otherItems = new List<Item>();
+			List<Item> categoryItems = new List<Item>();
+			List<Item> otherItems = new List<Item>();
 			foreach (Category category in Settings.Current.LastCategories)
 			{
 				categoryItems = items.Where(i => i.Feed.Category.Equals(category)).ToList();
@@ -179,6 +166,7 @@ namespace ReallySimple.iPhone.Core
 				break;
 			}
 
+			categoryItems = SortItems(categoryItems);
 			List<Item> sortedItems = new List<Item>();
 			sortedItems.AddRange(categoryItems);
 			sortedItems.AddRange(otherItems);
@@ -297,10 +285,23 @@ namespace ReallySimple.iPhone.Core
 			public AutoResetEvent WaitHandle { get; set; }
 			public Item Item { get; set; }
 		}
+		
+		private List<Item> SortItems(List<Item> items)
+		{
+			switch (Settings.Current.UserSettings.SortItemsBy)
+			{
+				case SortBy.Site:
+					return items.SortBySite();
+
+				case SortBy.Date:
+				default:
+					return items.SortByDate();
+			}
+		}
 
         public void TryStop()
         {
-			Console.WriteLine("Attempting to stop the ImageDownloader");
+			Logger.Info("Attempting to stop the ImageDownloader");
             if (_thread != null)
                 _thread.Abort();
         }

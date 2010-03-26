@@ -54,6 +54,7 @@ namespace ReallySimple.iPhone.UI
 			string imageHtml = "";
 			if (!string.IsNullOrEmpty(item.ImageFilename) && Settings.Current.UserSettings.ImagesEnabled)
 			{
+				// Can't find the file? The simulator may have a new Guid
 				bool imageExists = false;
 				string filename = Util.GetImageFullPath(item.ImageFilename);
 				if (!string.IsNullOrEmpty(filename))

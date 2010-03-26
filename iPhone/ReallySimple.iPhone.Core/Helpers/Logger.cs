@@ -32,7 +32,7 @@ namespace ReallySimple.iPhone.Core
 		public static void WriteLine(LoggingLevel level,string format, params object[] args)
 		{
 #if LOGGING
-			var name = new StackFrame(1,false).GetMethod().Name;
+			var name = new StackFrame(2,false).GetMethod().Name;
 
 			string prefix = string.Format("[{0} - {1}] ",level,name);
 			string message = string.Format(prefix + format, args);
@@ -48,7 +48,7 @@ namespace ReallySimple.iPhone.Core
 		{
 			try
 			{
-				File.AppendAllText(Settings.Current.LogFile, string.Format("[{0}] {1}\r\n", DateTime.UtcNow.ToString(), message));
+				File.AppendAllText(Settings.Current.LogFile, string.Format("[{0}] {1}\n", DateTime.UtcNow.ToString(), message));
 			}
 			catch (IOException)
 			{
