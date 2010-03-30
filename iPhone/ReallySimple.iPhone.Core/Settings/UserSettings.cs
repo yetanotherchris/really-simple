@@ -94,6 +94,10 @@ namespace ReallySimple.iPhone.Core
 			_sortItemsBy = SortBy.Date;
 		}
 
+		/// <summary>
+		/// The timeout for fetch/download operations in seconds.
+		/// </summary>
+		/// <returns></returns>
 		public int GetFetchTimeout()
 		{
 			switch (CurrentFetchTimeout)
@@ -108,6 +112,10 @@ namespace ReallySimple.iPhone.Core
 			}
 		}
 
+		/// <summary>
+		/// The number of hours to keep items for.
+		/// </summary>
+		/// <returns></returns>
 		public int GetKeepItemsFor()
 		{
 			switch (CurrentKeepItemsFor)
@@ -122,6 +130,10 @@ namespace ReallySimple.iPhone.Core
 			}
 		}
 
+		/// <summary>
+		/// Sets the fetch timeout in seconds.
+		/// </summary>
+		/// <param name="value"></param>
 		public void SetFetchTimeout(int value)
 		{
 			switch (value)
@@ -141,6 +153,10 @@ namespace ReallySimple.iPhone.Core
 			}
 		}
 
+		/// <summary>
+		/// Sets the number of hours to keep items for.
+		/// </summary>
+		/// <param name="value"></param>
 		public void SetKeepItemsFor(int value)
 		{
 			switch (value)

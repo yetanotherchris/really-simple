@@ -39,7 +39,7 @@ namespace ReallySimple.iPhone.Core
 
 			Console.WriteLine(message);
 
-			if (level != LoggingLevel.Info)
+			//if (level != LoggingLevel.Info)
 				WriteToFile(message);
 #endif
 		}

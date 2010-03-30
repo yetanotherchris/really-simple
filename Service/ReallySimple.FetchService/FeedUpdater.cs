@@ -39,8 +39,16 @@ namespace ReallySimple.FetchService
 			items = BasicRepository.ItemsForPast(12);
 			SaveToDisk(items, "12.bin.gz");
 
-			// Last 24 hours
-			items = BasicRepository.ItemsForPast(24);
+			// Last 24 hours. 
+			// Saturdays and sundays have very low postings so if the application is used on these days the user will get no news - 
+			// account for this by simply giving them Friday's.
+			int hours = 24;
+			if (DateTime.UtcNow.DayOfWeek == DayOfWeek.Saturday)
+				hours = 48;
+			else if (DateTime.UtcNow.DayOfWeek == DayOfWeek.Sunday)
+				hours = 72;
+
+			items = BasicRepository.ItemsForPast(hours);
 			SaveToDisk(items, "24.bin.gz");
 		}
 

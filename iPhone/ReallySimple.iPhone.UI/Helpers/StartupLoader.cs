@@ -86,11 +86,13 @@ namespace ReallySimple.iPhone.UI
 		
 		public void ClearOldItems()
 		{
-			// Old items first
-			Repository.Default.ClearItemsBeforeDate(DateTime.Today.AddDays(-Settings.Current.UserSettings.GetKeepItemsFor()));	
+			// Clear old items before N hours, unless we're on a weekend when the news posts crawl to a halt
+			if (DateTime.UtcNow.DayOfWeek != DayOfWeek.Saturday && DateTime.UtcNow.DayOfWeek == DayOfWeek.Sunday)
+				Repository.Default.ClearItemsBeforeDate(DateTime.Today.AddHours(-Settings.Current.UserSettings.GetKeepItemsFor()));	
 			
-			// Yesterday ticks
-			// Today ticks
+			// Ignore the folders for:
+			// - Yesterday ticks
+			// - Today ticks
 			if (Directory.Exists(Settings.Current.ImageFolder))
 			{
 				string ticksToday = DateTime.Today.Ticks.ToString();

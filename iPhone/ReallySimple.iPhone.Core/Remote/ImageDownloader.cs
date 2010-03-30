@@ -156,7 +156,7 @@ namespace ReallySimple.iPhone.Core
 			
 			List<Item> items = Repository.Default.ListItems().Where(i => !i.ImageDownloaded && !string.IsNullOrEmpty(i.ImageUrl)).ToList();
 
-			// Sort so the selected categories get the images first
+			// This sorts the items, so the selected categories get priority image downloads
 			List<Item> categoryItems = new List<Item>();
 			List<Item> otherItems = new List<Item>();
 			foreach (Category category in Settings.Current.LastCategories)
@@ -166,6 +166,7 @@ namespace ReallySimple.iPhone.Core
 				break;
 			}
 
+			// Re-add to the list
 			categoryItems = SortItems(categoryItems);
 			List<Item> sortedItems = new List<Item>();
 			sortedItems.AddRange(categoryItems);

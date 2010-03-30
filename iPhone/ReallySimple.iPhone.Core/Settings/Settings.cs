@@ -146,9 +146,9 @@ namespace ReallySimple.iPhone.Core
 			LastUpdate = DateTime.Now.AddDays(-1);
 
 			UserSettings = new UserSettings();
-			UserSettings.SetFetchTimeout(30);
+			UserSettings.SetFetchTimeout(20);
 			UserSettings.SetKeepItemsFor(24);
-			UserSettings.IgnoreReadItems = false;
+			UserSettings.IgnoreReadItems = true;
 			UserSettings.ImagesEnabled = false;
 			//UserSettings.OpenInSafari = true;
 		} 
@@ -275,6 +275,7 @@ namespace ReallySimple.iPhone.Core
 			ImageDownloader.Current.TryStop();
 			RepositoryInstance.WipeUserDatabase();
 			ItemCache.Current.Clear();
+
 			LastUpdate = DateTime.Now.AddDays(-1);
 			LastControllerId = "";
 			LastItemId = "";

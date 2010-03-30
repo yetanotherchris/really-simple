@@ -38,7 +38,7 @@ namespace ReallySimple.iPhone.UI.Controllers
 		public SettingsController(RootElement root) : base(root)
 		{
 			_bindingContext = new BindingContext(this, Settings.Current.UserSettings, "Settings");
-			this.Root = _bindingContext.Root;
+			Root = _bindingContext.Root;
 			ReloadData();
 		}
 
@@ -82,6 +82,8 @@ namespace ReallySimple.iPhone.UI.Controllers
 
 			NavigationItem.SetLeftBarButtonItem(_clearButton,false);
 			NavigationItem.SetRightBarButtonItem(_doneButton, false);
+
+			AddSettingsButtons();
 		}
 
 		public override void ViewWillAppear (bool animated)
@@ -100,12 +102,14 @@ namespace ReallySimple.iPhone.UI.Controllers
 		{
 			base.ViewWillDisappear(animated);
 
-			bool showImages = Settings.Current.UserSettings.ImagesEnabled;
+			bool previousShowImages = Settings.Current.UserSettings.ImagesEnabled;
+
+			// Update the UserSettings singleton
 			_bindingContext.Fetch();
 
 			// Trigger all feeds reloading again - only if it was false beforehand (as we need the images HTML).
 			// If the setting was previously TRUE and we're switching to FALSE, we already have the content and don't need to update again.
-			if (showImages == false && Settings.Current.UserSettings.ImagesEnabled)
+			if (previousShowImages == false && Settings.Current.UserSettings.ImagesEnabled)
 			{
 				Settings.Current.ClearCache(true);
 			}
@@ -114,7 +118,7 @@ namespace ReallySimple.iPhone.UI.Controllers
 			Settings.Current.LastControllerId = ControllerId;
 		}
 
-		private void AddSettingsButtons(BindingContext bindingContext)
+		private void AddSettingsButtons()
 		{
 			_containerView = new UIView();
 			_containerView.Frame = new RectangleF(10, 280, 300, 100);
@@ -127,7 +131,7 @@ namespace ReallySimple.iPhone.UI.Controllers
 			_emailButton.TouchDown += new EventHandler(EmailButtonTouchDown);
 			_containerView.AddSubview(_emailButton);
 
-			// Debug details (disabled for release builds)
+			// Debug details
 			_debugButton = UIButton.FromType(UIButtonType.RoundedRect);
 			_debugButton.Frame = new RectangleF(10, 45, 300, 40);
 			_debugButton.SetTitle(" Debug information", UIControlState.Normal);
@@ -140,7 +144,7 @@ namespace ReallySimple.iPhone.UI.Controllers
 			_containerView.AddSubview(_debugButton);
 
 			Section section = new Section(_containerView);
-			bindingContext.Root.Add(section);
+			_bindingContext.Root.Add(section);
 		}
 
 		private void EmailButtonTouchDown(object sender, EventArgs e)
