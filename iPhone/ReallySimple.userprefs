@@ -1,19 +1,14 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|iPhone" ctype="Workspace" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ReallySimple.iPhone.UI/Controllers/SettingsController.cs" ctype="Workbench">
-    <Files>
-      <File FileName="ReallySimple.iPhone.UI/Controllers/SettingsController.cs" Line="97" Column="4" />
-      <File FileName="ReallySimple.iPhone.UI/Controllers/ControllerBase.cs" Line="94" Column="41" />
-    </Files>
+  <MonoDevelop.Ide.Workbench ctype="Workbench">
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="ReallySimple.Core" expanded="True" />
-          <Node name="ReallySimple.iPhone.UI" expanded="True">
-            <Node name="Controllers" expanded="True">
-              <Node name="SettingsController.cs" selected="True" />
+          <Node name="ReallySimple.iPhone.Core" expanded="True">
+            <Node name="Helpers" expanded="True">
+              <Node name="Logger.cs" selected="True" />
             </Node>
-            <Node name="Helpers" expanded="True" />
+            <Node name="Settings" expanded="True" />
           </Node>
         </State>
       </Pad>

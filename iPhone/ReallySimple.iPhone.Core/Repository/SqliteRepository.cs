@@ -571,11 +571,11 @@ namespace ReallySimple.iPhone.Core
 						command.CommandText = sql;
 
 						SqliteParameter parameter = new SqliteParameter("@date", DbType.String);
-						parameter.Value = date.ToString("YYYY-MM-dd HH:mm:SS");
+						parameter.Value = date.ToString("yyyy-MM-dd HH:mm:ss");
 						command.Parameters.Add(parameter);
 
 						int rows = command.ExecuteNonQuery();
-						Logger.Info("ClearItemsBeforeDate before {0} cleared {1} rows.", date.ToString("YYYY-MM-dd HH:mm:SS"), rows);
+						Logger.Info("ClearItemsBeforeDate before {0} cleared {1} rows.", date.ToString("yyyy-MM-dd HH:mm:ss"), rows);
 					}
 				}
 			}

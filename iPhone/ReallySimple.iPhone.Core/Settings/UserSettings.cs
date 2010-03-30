@@ -122,9 +122,9 @@ namespace ReallySimple.iPhone.Core
 			{
 				case 0:
 					return 6;
-				case 2:
+				case 1:
 					return 12;
-				case 3:
+				case 2:
 				default:
 					return 24;
 			}
@@ -148,7 +148,7 @@ namespace ReallySimple.iPhone.Core
 
 				case 30:
 				default:
-					CurrentFetchTimeout = 3;
+					CurrentFetchTimeout = 2;
 					break;
 			}
 		}
@@ -171,7 +171,7 @@ namespace ReallySimple.iPhone.Core
 
 				case 24:
 				default:
-					CurrentKeepItemsFor = 3;
+					CurrentKeepItemsFor = 2;
 					break;
 			}
 		}
