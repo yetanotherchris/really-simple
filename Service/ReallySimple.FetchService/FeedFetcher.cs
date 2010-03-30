@@ -7,13 +7,15 @@ using ReallySimple.Core;
 using HtmlAgilityPack;
 using System.Xml.Serialization;
 using System.IO;
+using System.Net;
+using System.Text;
 
 namespace ReallySimple.FetchService
 {
 	/// <summary>
 	/// A simple RSS, RDF and ATOM feed parser.
 	/// </summary>
-	internal class FeedFetcher
+	public class FeedFetcher
 	{
 		private FeedCleaner _cleaner;
 		private Settings _settings;
@@ -91,19 +93,24 @@ namespace ReallySimple.FetchService
 		{
 			try
 			{
-				XDocument doc = XDocument.Load(feed.Url);
+				string xml = LoadXml(feed.Url);
+				using (StringReader reader = new StringReader(xml))
+				{
+					XDocument doc = XDocument.Load(reader);
 
-				// Feed/Entry
-				var entries = from item in doc.Root.Elements().Where(i => i.Name.LocalName == "entry")
-							  select item;
+					// Feed/Entry
+					var entries = from item in doc.Root.Elements().Where(i => i.Name.LocalName == "entry")
+								  select item;
 
-				List<Item> list = FillList(entries, feed, FeedType.Atom);
-				ParseImages(list);
+					List<Item> list = FillList(entries, feed, FeedType.Atom);
+					ParseImages(list);
 
-				return list;
+					return list;
+				}
 			}
-			catch
+			catch (Exception e)
 			{
+				Logger.WriteLine("An error occured with FeedFetcher.ParseAtom '{0}':\n\n{1}", feed.Url, e);
 				return new List<Item>();
 			}
 		}
@@ -115,19 +122,24 @@ namespace ReallySimple.FetchService
 		{
 			try
 			{
-				XDocument doc = XDocument.Load(feed.Url);
+				string xml = LoadXml(feed.Url);
+				using (StringReader reader = new StringReader(xml))
+				{
+					XDocument doc = XDocument.Load(reader);
 
-				// RSS/Channel/item
-				var entries = from item in doc.Root.Descendants().First(i => i.Name.LocalName == "channel").Elements().Where(i => i.Name.LocalName == "item")
-							  select item;
+					// RSS/Channel/item
+					var entries = from item in doc.Root.Descendants().First(i => i.Name.LocalName == "channel").Elements().Where(i => i.Name.LocalName == "item")
+								  select item;
 
-				List<Item> list = FillList(entries, feed, FeedType.RSS);
-				ParseImages(list);
+					List<Item> list = FillList(entries, feed, FeedType.RSS);
+					ParseImages(list);
 
-				return list;
+					return list;
+				}
 			}
-			catch
+			catch (Exception e)
 			{
+				Logger.WriteLine("An error occured with FeedFetcher.ParseRss '{0}':\n\n{1}", feed.Url, e);
 				return new List<Item>();
 			}
 		}
@@ -139,22 +151,39 @@ namespace ReallySimple.FetchService
 		{
 			try
 			{
-				XDocument doc = XDocument.Load(feed.Url);
+				string xml = LoadXml(feed.Url);
+				using (StringReader reader = new StringReader(xml))
+				{
+					XDocument doc = XDocument.Load(reader);
 
-				// <item> is under the root
-				var entries = from item in doc.Root.Descendants().Where(i => i.Name.LocalName == "item")
-							  select item;
+					// <item> is under the root
+					var entries = from item in doc.Root.Descendants().Where(i => i.Name.LocalName == "item")
+								  select item;
 
 
-				List<Item> list = FillList(entries, feed, FeedType.RDF);
-				ParseImages(list);
+					List<Item> list = FillList(entries, feed, FeedType.RDF);
+					ParseImages(list);
 
-				return list;
+					return list;
+                }
 			}
-			catch
+			catch (Exception e)
 			{
+				Logger.WriteLine("An error occured with FeedFetcher.ParseRdf '{0}':\n\n{1}", feed.Url, e);
 				return new List<Item>();
 			}
+		}
+
+		/// <summary>
+		/// Loads the XML from the url, with additional headers if needed.
+		/// </summary>
+		/// <param name="url"></param>
+		/// <returns></returns>
+		private string LoadXml(string url)
+		{
+			WebClient client = new WebClient();
+			client.Headers.Add("user-agent", "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
+			return client.DownloadString(url);
 		}
 
 		private List<Item> FillList(IEnumerable<XElement> elements, Feed feed, FeedType feedType)
@@ -203,27 +232,42 @@ namespace ReallySimple.FetchService
 					item.Link = element.Elements().First(i => i.Name.LocalName == "link").Value;
 					item.Title = element.Elements().First(i => i.Name.LocalName == "title").Value.Trim();
 
+					XElement dateElement = null;
+
 					if (feedType == FeedType.RSS)
 					{
-						item.PublishDate = ParseDate(element.Elements().First(i => i.Name.LocalName == "pubDate").Value);
+						dateElement = element.Elements().FirstOrDefault(i => i.Name.LocalName == "pubDate");
 					}
 					else
 					{
-						item.PublishDate = ParseDate(element.Elements().First(i => i.Name.LocalName == "date").Value);
+						dateElement = element.Elements().FirstOrDefault(i => i.Name.LocalName == "date");
+					}
+
+					if (dateElement != null)
+					{
+						item.PublishDate = ParseDate(dateElement.Value);
+					}
+					else
+					{
+						Logger.WriteLine("Warning: {0} is set as {1} but no pubDate/date element was found for the PublishDate.", feed.Url, feed.FeedType);
 					}
 				}
 
-				// Check it's not already in our list.
-				if (!AllItems.Exists(i => i.GetHashCode() == item.GetHashCode()))
+				// Check it has all the fields so it's not garbage
+				if (!string.IsNullOrEmpty(item.Title) && !string.IsNullOrEmpty(item.Content) && !string.IsNullOrEmpty(item.Link))
 				{
-					// Restrict the database size over time to something sane
-					if (count >= _settings.MaximumItemsPerFeed)
-						break;
+					// Check it's not already in our list.
+					if (!AllItems.Exists(i => i.GetHashCode() == item.GetHashCode()))
+					{
+						// Restrict the database size over time to something sane
+						if (count >= _settings.MaximumItemsPerFeed)
+							break;
 
-					list.Add(item);
+						list.Add(item);
+					}
+
+					count++;
 				}
-
-				count++;
 			}
 
 			return list;

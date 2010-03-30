@@ -98,7 +98,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="updateall.bat">
+    <Content Include="update-and-ftp.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

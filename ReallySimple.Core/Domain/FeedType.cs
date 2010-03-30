@@ -10,14 +10,14 @@ namespace ReallySimple.Core
 	    /// <summary>
 	    /// Really Simple Syndication format.
 	    /// </summary>
-	    RSS = 1,
+	    RSS,
 	    /// <summary>
 	    /// RDF site summary format.
 	    /// </summary>
-	    RDF = 2,
+	    RDF,
 	    /// <summary>
 	    /// Atom Syndication format.
 	    /// </summary>
-	    Atom = 3
+	    Atom,
 	}
 }
