@@ -36,7 +36,7 @@ CREATE TABLE [dbo].[items]
 	[title] [nvarchar] (200) NOT NULL,
 	[content] [text]  NULL,
 	[publishdate] [datetime],
-	[retrievedate] [datetime],
+	[retrievedate] [datetime], -- For reference only - not retrieved
 	[imagefilename] [varchar] (300) NULL,
 	[imageurl] [nvarchar] (400)
 

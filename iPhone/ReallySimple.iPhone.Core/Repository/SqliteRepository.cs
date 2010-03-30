@@ -554,6 +554,10 @@ namespace ReallySimple.iPhone.Core
 			}
 		}
 		
+		/// <summary>
+		/// Clears all items from the database where their PublishDate is before the date provided.
+		/// </summary>
+		/// <param name="date"></param>
 		public void ClearItemsBeforeDate(DateTime date)
 		{
 			try
@@ -563,14 +567,15 @@ namespace ReallySimple.iPhone.Core
 					connection.Open();
 					using (SqliteCommand command = new SqliteCommand(connection))
 					{
-						string sql = @"DELETE FROM items WHERE createdate >= datetime(@date)";
+						string sql = @"DELETE FROM items WHERE DATETIME(publishdate) <= DATETIME(@date)";
 						command.CommandText = sql;
 
 						SqliteParameter parameter = new SqliteParameter("@date", DbType.String);
 						parameter.Value = date.ToString("YYYY-MM-dd HH:mm:SS");
 						command.Parameters.Add(parameter);
 
-						command.ExecuteNonQuery();
+						int rows = command.ExecuteNonQuery();
+						Logger.Info("ClearItemsBeforeDate before {0} cleared {1} rows.", date.ToString("YYYY-MM-dd HH:mm:SS"), rows);
 					}
 				}
 			}

@@ -12,12 +12,12 @@ namespace ReallySimple.FetchService
 	internal class BasicRepository
 	{
 		/// <summary>
-		/// 
+		/// The connection string.
 		/// </summary>
 		public static string ConnectionString { get; set; }
 
 		/// <summary>
-		/// 
+		/// Saves an item to the database, including a reference retrieve date.
 		/// </summary>
 		/// <param name="item"></param>
 		public static void SaveItem(Item item)
@@ -128,6 +128,43 @@ namespace ReallySimple.FetchService
 			return list;
 		}
 
+		/// <summary>
+		/// Clears all items that are 3 or more days old
+		/// </summary>
+		/// <returns></returns>
+		public static List<Item> ClearOldItems()
+		{
+			List<Item> list = new List<Item>();
+
+			try
+			{
+				using (SqlConnection connection = new SqlConnection(ConnectionString))
+				{
+					connection.Open();
+					using (SqlCommand command = new SqlCommand())
+					{
+						// Ignore read items if it's setup.
+						string sql = "DELETE items WHERE retrievedate > CONVERT(DateTime,'{0}',103)";
+						sql = string.Format(sql, DateTime.Now.AddDays(-3).ToString("dd-MM-yyyy HH:mm:00.00"));
+						command.Connection = connection;
+						command.CommandText = sql;
+						command.ExecuteNonQuery();
+					}
+				}
+			}
+			catch (SqlException e)
+			{
+				Logger.WriteLine("A SqlException occured with ClearOldItems:\n\n{0}", e);
+			}
+
+			return list;
+		}
+
+		/// <summary>
+		/// Gets all items from the database where their *publishdate* is the specified hours in the past.
+		/// </summary>
+		/// <param name="hours"></param>
+		/// <returns></returns>
 		public static List<Item> ItemsForPast(int hours)
 		{
 			List<Item> list = new List<Item>();

@@ -84,6 +84,9 @@ namespace ReallySimple.iPhone.UI
 			Logger.Info("StartupLoader.LoadHtmlTemplates took {0}ms", stopwatch.ElapsedMilliseconds);
 		}
 		
+		/// <summary>
+		/// Clears all old items from the database, and removes old image cache folders.
+		/// </summary>
 		public void ClearOldItems()
 		{
 			// Clear old items before N hours, unless we're on a weekend when the news posts crawl to a halt
@@ -93,17 +96,24 @@ namespace ReallySimple.iPhone.UI
 			// Ignore the folders for:
 			// - Yesterday ticks
 			// - Today ticks
-			if (Directory.Exists(Settings.Current.ImageFolder))
+			try
 			{
-				string ticksToday = DateTime.Today.Ticks.ToString();
-				string ticksYesterday = DateTime.Today.AddDays(-1).Ticks.ToString();
-				foreach (string directory in Directory.GetDirectories(Settings.Current.ImageFolder))
+				if (Directory.Exists(Settings.Current.ImageFolder))
 				{
-					if (!directory.EndsWith(ticksToday) && !directory.EndsWith(ticksYesterday))
+					string ticksToday = DateTime.Today.Ticks.ToString();
+					string ticksYesterday = DateTime.Today.AddDays(-1).Ticks.ToString();
+					foreach (string directory in Directory.GetDirectories(Settings.Current.ImageFolder))
 					{
-						Directory.Delete(directory,true);
+						if (!directory.EndsWith(ticksToday) && !directory.EndsWith(ticksYesterday))
+						{
+							Directory.Delete(directory, true);
+						}
 					}
 				}
+			}
+			catch (IOException e)
+			{
+				Logger.Warn("IOException with ClearOldItems: \n{0}", e);
 			}
 		}
 	}

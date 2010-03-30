@@ -17,6 +17,7 @@ namespace Update
 			Settings settings = new Settings(5,ConfigurationManager.ConnectionStrings["local"].ConnectionString);
 
 			FeedUpdater updater = new FeedUpdater(settings);
+			updater.ClearOldItems();
 			updater.Update();
 		}
 	}

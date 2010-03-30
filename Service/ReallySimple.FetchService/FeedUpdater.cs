@@ -22,6 +22,12 @@ namespace ReallySimple.FetchService
 			_settings = settings;
 		}
 
+		public void ClearOldItems()
+		{
+			BasicRepository.ConnectionString = _settings.ConnectionString;
+			BasicRepository.ClearOldItems();
+		}
+
 		public void Update()
 		{
 			BasicRepository.ConnectionString = _settings.ConnectionString;
