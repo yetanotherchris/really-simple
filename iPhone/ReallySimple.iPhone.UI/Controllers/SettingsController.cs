@@ -38,6 +38,7 @@ namespace ReallySimple.iPhone.UI.Controllers
 		public SettingsController(RootElement root) : base(root)
 		{
 			_bindingContext = new BindingContext(this, Settings.Current.UserSettings, "Settings");
+			this.Root = _bindingContext.Root;
 			ReloadData();
 		}
 
@@ -49,10 +50,13 @@ namespace ReallySimple.iPhone.UI.Controllers
 		{
 			
 		}
-
-		public override void ViewDidAppear (bool animated)
+		
+		public override void ViewDidLoad ()
 		{
-			base.ViewDidAppear (animated);
+			//UIView.BeginAnimations("Flip");
+			//UIView.SetAnimationDuration(1.0);
+			//UIView.SetAnimationTransition(UIViewAnimationTransition.FlipFromRight,View,true);
+			base.ViewDidLoad ();
 			
 			// Hide the navigation bar, back button and toolbar.
 			NavigationController.SetToolbarHidden(true,false);
@@ -78,6 +82,18 @@ namespace ReallySimple.iPhone.UI.Controllers
 
 			NavigationItem.SetLeftBarButtonItem(_clearButton,false);
 			NavigationItem.SetRightBarButtonItem(_doneButton, false);
+		}
+
+		public override void ViewWillAppear (bool animated)
+		{
+			base.ViewWillAppear (animated);
+		}
+
+
+		public override void ViewDidAppear(bool animated)
+		{
+			base.ViewDidAppear (animated);
+			//UIView.CommitAnimations();
 		}		
 
 		public override void ViewWillDisappear(bool animated)

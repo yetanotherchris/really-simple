@@ -15,11 +15,10 @@ namespace ReallySimple.iPhone.UI.Controllers
 				return "Information";
 			}
 		}
-		
+
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-			
 			Title = "Information";
 		}
 	}
