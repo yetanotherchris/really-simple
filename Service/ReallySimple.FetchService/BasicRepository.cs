@@ -132,10 +132,8 @@ namespace ReallySimple.FetchService
 		/// Clears all items that are 3 or more days old
 		/// </summary>
 		/// <returns></returns>
-		public static List<Item> ClearOldItems()
+		public static void ClearOldItems()
 		{
-			List<Item> list = new List<Item>();
-
 			try
 			{
 				using (SqlConnection connection = new SqlConnection(ConnectionString))
@@ -144,7 +142,7 @@ namespace ReallySimple.FetchService
 					using (SqlCommand command = new SqlCommand())
 					{
 						// Ignore read items if it's setup.
-						string sql = "DELETE items WHERE retrievedate > CONVERT(DateTime,'{0}',103)";
+						string sql = "DELETE items WHERE publishdate <= CONVERT(DateTime,'{0}',103)";
 						sql = string.Format(sql, DateTime.Now.AddDays(-3).ToString("dd-MM-yyyy HH:mm:00.00"));
 						command.Connection = connection;
 						command.CommandText = sql;
@@ -156,8 +154,6 @@ namespace ReallySimple.FetchService
 			{
 				Logger.WriteLine("A SqlException occured with ClearOldItems:\n\n{0}", e);
 			}
-
-			return list;
 		}
 
 		/// <summary>
@@ -177,7 +173,7 @@ namespace ReallySimple.FetchService
 					using (SqlCommand command = new SqlCommand())
 					{
 						// Ignore read items if it's setup.
-						string sql = "SELECT * FROM items WHERE retrievedate > CONVERT(DateTime,'{0}',103)";
+						string sql = "SELECT * FROM items WHERE publishdate >= CONVERT(DateTime,'{0}',103)";
 						sql = string.Format(sql, DateTime.Now.AddHours(-hours).ToString("dd-MM-yyyy HH:mm:00.00"));
 						command.Connection = connection;
 						command.CommandText = sql;
