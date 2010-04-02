@@ -11,6 +11,18 @@ namespace ReallySimple.iPhone.Core
 	/// </summary>
 	public class Logger
 	{
+		static Logger()
+		{
+#if LOGGING
+			try	
+			{
+				if (File.Exists(Settings.Current.LogFile))
+					File.Delete(Settings.Current.LogFile);
+			}
+			catch {}
+#endif
+		}
+		
 		public static void Info(string format, params object[] args)
 		{
 			WriteLine(LoggingLevel.Info,format,args);

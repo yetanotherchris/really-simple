@@ -10,6 +10,7 @@ using System.Text;
 using System.IO;
 using ReallySimple.Core;
 using System.Linq;
+using MonoTouch.CoreAnimation;
 
 namespace ReallySimple.iPhone.UI.Controllers
 {
@@ -76,8 +77,13 @@ namespace ReallySimple.iPhone.UI.Controllers
 			_settingsButton.Image = UIImage.FromFile("Assets/Images/Toolbar/settings.png");
 			_settingsButton.Clicked += delegate
 			{
+				UIView.BeginAnimations(null,IntPtr.Zero);
+				UIView.SetAnimationDuration(0.5);
+				UIView.SetAnimationTransition(UIViewAnimationTransition.FlipFromLeft,NavigationController.View,true);
+				
 				_settingsController = new SettingsController(null);
-				NavigationController.PushViewController(_settingsController, true);
+				NavigationController.PushViewController(_settingsController, false);
+				UIView.CommitAnimations();
 			};
 			
 			// Information icon
@@ -86,7 +92,7 @@ namespace ReallySimple.iPhone.UI.Controllers
 			_informationButton.Clicked += delegate
 			{
 				_informationController = new InformationController();
-				NavigationController.PushViewController(_informationController,true);
+				NavigationController.PushViewController(_informationController,false);
 			};
 			
 			// Two spacers to go between each icon

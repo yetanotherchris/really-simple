@@ -14,7 +14,7 @@ namespace ReallySimple.iPhone.UI
 	/// </summary>
 	public class StartupLoader
 	{
-		public void LoadSettings()
+		public void InitializeDatabase()
 		{
 			Stopwatch stopwatch = new Stopwatch();
 			stopwatch.Start();
@@ -32,6 +32,15 @@ namespace ReallySimple.iPhone.UI
 			Repository.SetInstance(Settings.Current.RepositoryInstance,feedsConnection,itemsConnection);
 			
 			sqliteRepository.CreateDatabase();
+
+			stopwatch.Stop();
+			Logger.Info("StartupLoader.InitializeDatabase took {0}ms",stopwatch.ElapsedMilliseconds);
+		}
+		
+		public void LoadSettings()
+		{
+			Stopwatch stopwatch = new Stopwatch();
+			stopwatch.Start();
 
 			// Main user settings
 			Settings.Current.Read();		

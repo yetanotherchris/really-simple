@@ -13,9 +13,6 @@ namespace ReallySimple.iPhone.UI.Controllers
 		private UIViewController _controller;
 		private PickCategoriesController _pickCategories;
 
-		/// <summary>
-		/// Pushes the splash screen as the first view.
-		/// </summary>
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();

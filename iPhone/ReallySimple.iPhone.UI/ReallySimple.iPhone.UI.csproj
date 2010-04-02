@@ -118,6 +118,14 @@
     </Reference>
     <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Libraries\MonoTouch.Dialog\bin\iPhoneSimulator\Release\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ReallySimple.iPhone.Core\lib\MonoTouch.Dialog.dll</HintPath>
     </Reference>
   </ItemGroup>
@@ -135,6 +143,7 @@
     <Compile Include="Controllers\PickCategoriesController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Views\LoadingFeedsView.cs" />
+    <Compile Include="Controllers\SplashScreenController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -188,12 +197,9 @@
     <Content Include="Assets\Images\defaultbg.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Images\splashscreen.png" />
     <Content Include="Default.png" />
     <Content Include="lib\HtmlAgilityMT.dll" />
     <Content Include="lib\HtmlAgilityMT.XML" />
-    <Content Include="lib\SmartThreadPoolMT.dll" />
-    <Content Include="lib\SmartThreadPoolMT.XML" />
     <Content Include="Assets\Feeds.db" />
   </ItemGroup>
   <ItemGroup>

@@ -8,7 +8,7 @@ namespace ReallySimple.Core
 	{	
 		public static List<Item> SortByDate(this IList<Item> list)  
 		{  
-			return list.OrderByDescending(i => i.PublishDate.ToString()).ToList(); 
+			return list.OrderByDescending(i => i.PublishDate).ToList(); 
 		}
 		
 		public static List<Item> SortBySite(this IList<Item> list)  

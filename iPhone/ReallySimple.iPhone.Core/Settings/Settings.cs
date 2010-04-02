@@ -146,10 +146,10 @@ namespace ReallySimple.iPhone.Core
 			LastUpdate = DateTime.Now.AddDays(-1);
 
 			UserSettings = new UserSettings();
-			UserSettings.SetFetchTimeout(20);
+			UserSettings.SetFetchTimeout(30);
 			UserSettings.SetKeepItemsFor(24);
 			UserSettings.IgnoreReadItems = true;
-			UserSettings.ImagesEnabled = false;
+			UserSettings.ImagesEnabled = true;
 			//UserSettings.OpenInSafari = true;
 		} 
 		#endregion
@@ -164,6 +164,14 @@ namespace ReallySimple.iPhone.Core
 			try
 			{
 				var defaults = NSUserDefaults.StandardUserDefaults;
+				
+				// If the app hasn't run before, use the defaults (and try
+				// to avoid doubling up the defaults in 2 methods).
+				if (!defaults.BoolForKey("hasrun"))
+				{
+					Defaults();
+					return;
+				}
 
 				// Last view
 				LastControllerId = defaults.StringForKey("lastcontrollerid") ?? "";
@@ -212,7 +220,7 @@ namespace ReallySimple.iPhone.Core
 				// Timeout
 				int timeout = defaults.IntForKey("timeout");
 				if (timeout < 1)
-					UserSettings.SetFetchTimeout(20);
+					UserSettings.SetFetchTimeout(30);
 				else
 					UserSettings.SetFetchTimeout(timeout);
 
@@ -241,6 +249,8 @@ namespace ReallySimple.iPhone.Core
 		{
 			try
 			{
+				NSUserDefaults.StandardUserDefaults.SetBool(true, "hasrun");
+				
 				// Last controller and the last guid
 				NSUserDefaults.StandardUserDefaults.SetString(LastControllerId ?? "", "lastcontrollerid");
 				NSUserDefaults.StandardUserDefaults.SetString(LastItemId ?? "", "lastitemid");

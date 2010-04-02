@@ -23,14 +23,6 @@ namespace ReallySimple.iPhone.UI.Controllers
 		private UIButton _emailButton;
 		private UIButton _debugButton;
 		private UIView _containerView;
-		
-		protected string ControllerId
-		{
-			get
-			{
-				return "";
-			}
-		}
 
 		/// <summary>
 		/// Required by MonoTouch.Dialog
@@ -53,9 +45,7 @@ namespace ReallySimple.iPhone.UI.Controllers
 		
 		public override void ViewDidLoad ()
 		{
-			//UIView.BeginAnimations("Flip");
-			//UIView.SetAnimationDuration(1.0);
-			//UIView.SetAnimationTransition(UIViewAnimationTransition.FlipFromRight,View,true);
+			Title = "Settings";
 			base.ViewDidLoad ();
 			
 			// Hide the navigation bar, back button and toolbar.
@@ -67,8 +57,13 @@ namespace ReallySimple.iPhone.UI.Controllers
 			_doneButton.Title = "Done";
 			_doneButton.Clicked += delegate(object sender, EventArgs e) 
 			{
+				UIView.BeginAnimations(null,IntPtr.Zero);
+				UIView.SetAnimationDuration(0.5);
+				UIView.SetAnimationTransition(UIViewAnimationTransition.FlipFromRight,NavigationController.View,true);
+				
 				_pickCategories = new PickCategoriesController();
-				NavigationController.PushViewController(_pickCategories, true);
+				NavigationController.PushViewController(_pickCategories, false);
+				UIView.CommitAnimations();
 			};
 			
 			// Clear cache
@@ -84,19 +79,7 @@ namespace ReallySimple.iPhone.UI.Controllers
 			NavigationItem.SetRightBarButtonItem(_doneButton, false);
 
 			AddSettingsButtons();
-		}
-
-		public override void ViewWillAppear (bool animated)
-		{
-			base.ViewWillAppear (animated);
-		}
-
-
-		public override void ViewDidAppear(bool animated)
-		{
-			base.ViewDidAppear (animated);
-			//UIView.CommitAnimations();
-		}		
+		}	
 
 		public override void ViewWillDisappear(bool animated)
 		{
@@ -115,7 +98,7 @@ namespace ReallySimple.iPhone.UI.Controllers
 			}
 
 			// Persist the controller name for next load
-			Settings.Current.LastControllerId = ControllerId;
+			Settings.Current.LastControllerId = "Settings";
 		}
 
 		private void AddSettingsButtons()

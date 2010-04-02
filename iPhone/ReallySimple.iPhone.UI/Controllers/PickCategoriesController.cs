@@ -40,9 +40,8 @@ namespace ReallySimple.iPhone.UI.Controllers
 		/// </summary>
 		public override void ViewDidLoad ()
 		{
-			base.ViewDidLoad ();
-			
 			Title = "Categories";
+			base.ViewDidLoad ();
 			
 			// Re-show the toolbar here for consistency
 			NavigationItem.HidesBackButton = true;

@@ -421,10 +421,6 @@ namespace ReallySimple.iPhone.Core
 					{
 						// The minimum we can load
 						string sql = "SELECT id,feedid,isread,link,publishDate,imageDownloaded,imageUrl FROM items ";
-
-						if (Settings.Current.UserSettings.IgnoreReadItems)
-							sql += "WHERE isread=0 ";
-
 						sql += "ORDER BY pkid";
 						command.CommandText = sql;
 

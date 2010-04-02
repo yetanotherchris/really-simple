@@ -161,9 +161,12 @@ namespace ReallySimple.iPhone.UI.Controllers
 			
 			_itemsForSelectedCategories = new List<Item>();
 
-			foreach (Item currentitem in Repository.Default.ListItems())
+			// Use local variables to avoid repeated calls
+			var allItems = Repository.Default.ListItems();
+			var lastCategories = Settings.Current.LastCategories;
+			foreach (Item currentitem in allItems)
 			{
-				if (Settings.Current.LastCategories.Contains(currentitem.Feed.Category))
+				if (lastCategories.Contains(currentitem.Feed.Category))
 					_itemsForSelectedCategories.Add(currentitem);
 			}
 

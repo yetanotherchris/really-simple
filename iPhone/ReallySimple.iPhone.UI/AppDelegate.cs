@@ -10,25 +10,16 @@ namespace ReallySimple.iPhone.UI
 	public partial class AppDelegate : UIApplicationDelegate
 	{
 		private UIWindow _window;
-		private RootController _navigationController;
+		private SplashScreenController _splashScreenController;
 		
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{			
 			_window = new UIWindow(UIScreen.MainScreen.Bounds);
-
-			// All startup tasks
-			StartupLoader loader = new StartupLoader();
-			loader.LoadSettings();
-			loader.LoadCategories();
-			loader.LoadItems();
-			loader.LoadSites();
-			loader.LoadHtmlTemplates();
-			loader.ClearOldItems();
 			
-			// Add the the root controller
-			_navigationController = new RootController();
+			// Add the the splash controller
+			_splashScreenController = new SplashScreenController();
 			_window.BackgroundColor = UIColor.FromRGBA(0x36, 0x36, 0x36, 1);
-			_window.AddSubview(_navigationController.View);
+			_window.AddSubview(_splashScreenController.View);
 			_window.MakeKeyAndVisible();
 			
 			return true;
@@ -37,17 +28,6 @@ namespace ReallySimple.iPhone.UI
 		public override void WillTerminate(UIApplication application)
 		{
 			Settings.Current.Write();
-		}
-		
-		public override void OnResignActivation (UIApplication application)
-		{							
-			//var controllers = _navigationController.ViewControllers;
-			//var currentController = controllers[controllers.Length -1] as ViewFeedsController;
-			
-			//if (currentController != null && currentController.IsLoading)
-			//{
-			//	_navigationController.PopViewControllerAnimated(false);
-			//}
 		}
 		
 		// This method is required in iPhoneOS 3.0
