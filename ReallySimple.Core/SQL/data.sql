@@ -69,8 +69,8 @@ INSERT INTO sites (id, url, title) VALUES ('650DE5A6-F53E-4BD8-AF77-1A3554ABDC2E
 INSERT INTO sites (id, url, title) VALUES ('B0680A9F-048E-47F1-83DA-2A8D4CB0576B', 'http://www.inhabitat.com', 'Inhabitat');
 INSERT INTO sites (id, url, title) VALUES ('C0253B4F-4DB4-44BA-9492-D955F2D5ABA8', 'http://www.treehugger.com', 'Treehugger');
 INSERT INTO sites (id, url, title) VALUES ('6C914EEA-98C5-4F42-8397-43BFE4669635', 'http://www.empireonline.com', 'Empire');
-INSERT INTO sites (id, url, title) VALUES ('3DE7EA64-9DB0-4D68-989A-74302FD84A62', 'http://www.slashfilm.com', 'Slashfilm');
-INSERT INTO sites (id, url, title) VALUES ('6BE67089-19FC-45DC-9588-6141C3119039', 'http://www.rottentomatoes.com', 'Rotten Tomatoes');
+INSERT INTO sites (id, url, title) VALUES ('3DE7EA64-9DB0-4D68-989A-74302FD84A62', 'http://www.rottentomatoes.com', 'Rotten Tomatoes');
+INSERT INTO sites (id, url, title) VALUES ('6BE67089-19FC-45DC-9588-6141C3119039', 'http://www.slashfilm.com', 'Slashfilm');
 INSERT INTO sites (id, url, title) VALUES ('76ACBEF0-0070-4182-90A7-47B8BFC44A6F', 'http://www.totalfilm.com', 'Total Film');
 INSERT INTO sites (id, url, title) VALUES ('F96A35FD-1BED-42ED-8A29-E907E4FE8CF4', 'http://www.yahoo.com', 'Yahoo');
 INSERT INTO sites (id, url, title) VALUES ('80EBBC2F-8177-4643-88A8-EC4F5A5028FB', 'http://www.ap.org', 'Associated Press');

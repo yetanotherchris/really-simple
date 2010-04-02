@@ -183,7 +183,15 @@ namespace ReallySimple.FetchService
 		{
 			WebClient client = new WebClient();
 			client.Headers.Add("user-agent", "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
-			return client.DownloadString(url);
+			string xml = client.DownloadString(url);
+
+			// TODO: a better fix for this
+			xml = xml.Replace("‘", "'");
+			xml = xml.Replace("’", "'");
+			xml = xml.Replace("“", "\"");
+			xml = xml.Replace("”", "\"");
+
+			return xml;
 		}
 
 		private List<Item> FillList(IEnumerable<XElement> elements, Feed feed, FeedType feedType)
