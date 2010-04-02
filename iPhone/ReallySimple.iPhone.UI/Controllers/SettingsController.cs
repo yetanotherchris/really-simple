@@ -57,12 +57,12 @@ namespace ReallySimple.iPhone.UI.Controllers
 			_doneButton.Title = "Done";
 			_doneButton.Clicked += delegate(object sender, EventArgs e) 
 			{
+				_pickCategories = new PickCategoriesController();
+				NavigationController.PushViewController(_pickCategories, false);
+				
 				UIView.BeginAnimations(null,IntPtr.Zero);
 				UIView.SetAnimationDuration(0.5);
 				UIView.SetAnimationTransition(UIViewAnimationTransition.FlipFromRight,NavigationController.View,true);
-				
-				_pickCategories = new PickCategoriesController();
-				NavigationController.PushViewController(_pickCategories, false);
 				UIView.CommitAnimations();
 			};
 			
@@ -79,7 +79,7 @@ namespace ReallySimple.iPhone.UI.Controllers
 			NavigationItem.SetRightBarButtonItem(_doneButton, false);
 
 			AddSettingsButtons();
-		}	
+		}
 
 		public override void ViewWillDisappear(bool animated)
 		{

@@ -18,8 +18,8 @@ namespace ReallySimple.iPhone.UI.Controllers
 
 		public override void ViewDidLoad ()
 		{
-			base.ViewDidLoad ();
 			Title = "Information";
+			base.ViewDidLoad ();
 		}
 	}
 }

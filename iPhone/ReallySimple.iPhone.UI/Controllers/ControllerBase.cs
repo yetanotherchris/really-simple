@@ -77,12 +77,15 @@ namespace ReallySimple.iPhone.UI.Controllers
 			_settingsButton.Image = UIImage.FromFile("Assets/Images/Toolbar/settings.png");
 			_settingsButton.Clicked += delegate
 			{
+				_settingsController = new SettingsController(null);
+				NavigationController.PushViewController(_settingsController, false);
+				
 				UIView.BeginAnimations(null,IntPtr.Zero);
 				UIView.SetAnimationDuration(0.5);
 				UIView.SetAnimationTransition(UIViewAnimationTransition.FlipFromLeft,NavigationController.View,true);
+				UIView.SetAnimationBeginsFromCurrentState(true);
 				
-				_settingsController = new SettingsController(null);
-				NavigationController.PushViewController(_settingsController, false);
+				
 				UIView.CommitAnimations();
 			};
 			
@@ -91,8 +94,14 @@ namespace ReallySimple.iPhone.UI.Controllers
 			_informationButton.Image = UIImage.FromFile("Assets/Images/Toolbar/information.png");
 			_informationButton.Clicked += delegate
 			{
-				_informationController = new InformationController();
-				NavigationController.PushViewController(_informationController,false);
+				InformationController controller = NavigationController.ViewControllers[NavigationController.ViewControllers.Length -1] as InformationController;
+				
+				// Don't push onto the stack if informationcontroll is already the top controller.
+				if (controller == null)
+				{			
+					_informationController = new InformationController();
+					NavigationController.PushViewController(_informationController,true);
+				}
 			};
 			
 			// Two spacers to go between each icon

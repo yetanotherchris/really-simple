@@ -19,7 +19,7 @@ namespace ReallySimple.iPhone.UI
 			// Add the the splash controller
 			_splashScreenController = new SplashScreenController();
 			_window.BackgroundColor = UIColor.FromRGBA(0x36, 0x36, 0x36, 1);
-			_window.AddSubview(_splashScreenController.View);
+			_window.Add(_splashScreenController.View);
 			_window.MakeKeyAndVisible();
 			
 			return true;
