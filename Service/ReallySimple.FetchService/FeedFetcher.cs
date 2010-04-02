@@ -206,7 +206,7 @@ namespace ReallySimple.FetchService
 					item.RawHtml = html;
 					item.Link = element.Elements().First(i => i.Name.LocalName == "link").Attribute("href").Value;
 					item.PublishDate = ParseDate(element.Elements().First(i => i.Name.LocalName == "published").Value);
-					item.Title = element.Elements().First(i => i.Name.LocalName == "title").Value.Trim();
+					item.Title = CleanTitle(element.Elements().First(i => i.Name.LocalName == "title").Value);
 				}
 				else
 				{
@@ -230,22 +230,23 @@ namespace ReallySimple.FetchService
 					item.Content = CleanContent(html);
 					item.RawHtml = html;
 					item.Link = element.Elements().First(i => i.Name.LocalName == "link").Value;
-					item.Title = element.Elements().First(i => i.Name.LocalName == "title").Value.Trim();
+					item.Title = CleanTitle(element.Elements().First(i => i.Name.LocalName == "title").Value);
 
 					XElement dateElement = null;
 
+					// The only difference we care about with RSS and RDF:
 					if (feedType == FeedType.RSS)
-					{
 						dateElement = element.Elements().FirstOrDefault(i => i.Name.LocalName == "pubDate");
-					}
 					else
-					{
 						dateElement = element.Elements().FirstOrDefault(i => i.Name.LocalName == "date");
-					}
 
 					if (dateElement != null)
 					{
 						item.PublishDate = ParseDate(dateElement.Value);
+
+						// Some naughty feeds set their publish date to the future
+						if (item.PublishDate > DateTime.UtcNow)
+							item.PublishDate = DateTime.UtcNow;
 					}
 					else
 					{
@@ -276,6 +277,24 @@ namespace ReallySimple.FetchService
 		private string CleanContent(string html)
 		{
 			return _cleaner.CleanHtml(html);
+		}
+
+		/// <summary>
+		/// Some feeds put these characters in (probably posting from a Mac), however
+		/// XDocument tries to parse them actual characters because they're not inside
+		/// CDATA - so replace them.
+		/// </summary>
+		/// <param name="title"></param>
+		/// <returns></returns>
+		private string CleanTitle(string title)
+		{
+			title = title.Trim();
+			title = title.Replace("&#8217;", "'");
+			title = title.Replace("&#8220;", "\"");
+			title = title.Replace("&#8221;", "\"");
+			title = title.Replace("&#8217;", "'");
+
+			return title;
 		}
 
 		private void ParseImages(List<Item> list)
