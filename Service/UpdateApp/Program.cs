@@ -7,6 +7,7 @@ using ReallySimple.Core;
 using System.Configuration;
 using log4net;
 using log4net.Config;
+using System.Diagnostics;
 
 namespace Update
 {
@@ -14,19 +15,35 @@ namespace Update
 	{
 		static void Main(string[] args)
 		{
-			Settings settings = new Settings(5,ConfigurationManager.ConnectionStrings["local"].ConnectionString);
+			if (args.Length == 0)
+			{
+				ProcessStartInfo info = new ProcessStartInfo(@"C:\ReallySimple-Updater\Update.exe", "launch");
+				info.CreateNoWindow = true;
+				info.WindowStyle = ProcessWindowStyle.Hidden;
+				Process process = Process.Start(info);
+			}
+			else if (args[0] == "launch")
+			{
+				ProcessStartInfo info = new ProcessStartInfo(@"C:\ReallySimple-Updater\Update.exe","update");
+				info.CreateNoWindow = true;
+				info.WindowStyle = ProcessWindowStyle.Hidden;
+				Process process = Process.Start(info);
+				process.WaitForExit();
 
-			Feed feed = new Feed();
-			feed.Url = "http://feeds.feedburner.com/Inhabitat";
-			feed.FeedType = FeedType.RSS;
+				info = new ProcessStartInfo(@"ftp.exe", @"-s:C:\ReallySimple-Updater\ftp.txt");
+				info.CreateNoWindow = true;
+				info.WindowStyle = ProcessWindowStyle.Hidden;
+				process = Process.Start(info);
+				process.WaitForExit();
+			}
+			else if (args[0] == "update")
+			{
+				Settings settings = new Settings(5, ConfigurationManager.ConnectionStrings["local"].ConnectionString);
 
-			FeedFetcher fetcher = new FeedFetcher(settings, new List<Item>());
-			fetcher.Parse(feed);
-			return;
-
-			FeedUpdater updater = new FeedUpdater(settings);
-			updater.ClearOldItems();
-			updater.Update();
+				FeedUpdater updater = new FeedUpdater(settings);
+				updater.ClearOldItems();
+				updater.Update();
+			}
 		}
 	}
 }
