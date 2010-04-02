@@ -1,25 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" ctype="Workspace" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ReallySimple.iPhone.UI/Controllers/ViewFeedsController.cs" ctype="Workbench">
-    <Files>
-      <File FileName="ReallySimple.iPhone.UI/Controllers/ViewFeedsController.cs" Line="156" Column="4" />
-    </Files>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|iPhone" ctype="Workspace" />
+  <MonoDevelop.Ide.Workbench ctype="Workbench">
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True" selected="True">
-          <Node name="ReallySimple.Core" expanded="True">
-            <Node name="Repository" expanded="True" />
-          </Node>
-          <Node name="ReallySimple.iPhone.Core" expanded="True">
-            <Node name="Repository" expanded="True" />
-          </Node>
+        <State expanded="True">
           <Node name="ReallySimple.iPhone.UI" expanded="True">
-            <Node name="Assets" expanded="True">
-              <Node name="Images" expanded="True" />
+            <Node name="Controllers" expanded="True">
+              <Node name="PickCategoriesController.cs" selected="True" />
             </Node>
-            <Node name="Controllers" expanded="True" />
-            <Node name="Helpers" expanded="True" />
-            <Node name="lib" expanded="True" />
           </Node>
         </State>
       </Pad>
