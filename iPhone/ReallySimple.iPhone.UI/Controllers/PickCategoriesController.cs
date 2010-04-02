@@ -70,7 +70,7 @@ namespace ReallySimple.iPhone.UI.Controllers
 			NavigationItem.SetRightBarButtonItem(_rightButton,false);
 			
 			// All category buttons
-			int x = 7, y = 10;
+			int x = 7, y = 35;
 			int width = 150, height = 50;
 			_categoryButtons.Clear();
 
