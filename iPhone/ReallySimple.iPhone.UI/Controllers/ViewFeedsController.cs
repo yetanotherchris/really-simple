@@ -7,6 +7,7 @@ using MonoTouch.Foundation;
 using System.Drawing;
 using ReallySimple.iPhone.Core;
 using System.Threading;
+using ReallySimple.iPhone.UI.Views;
 
 namespace ReallySimple.iPhone.UI.Controllers
 {
@@ -76,7 +77,7 @@ namespace ReallySimple.iPhone.UI.Controllers
 			// Add the webview
 			_webView = new UIWebView();
 			_webView.Alpha = 0; // no white flashing
-			_webView.Delegate = new WebDelegate();
+			_webView.Delegate = new DefaultWebDelegate();
 			
 			View.AddSubview(_webView);
 			View.BringSubviewToFront(_webView);
@@ -346,32 +347,6 @@ namespace ReallySimple.iPhone.UI.Controllers
 			}
 			
 			return true;
-		}
-	}
-
-	/// <summary>
-	/// Handles all links clicked in the webview, and directs them to Safari.
-	/// </summary>
-	public class WebDelegate : UIWebViewDelegate
-	{
-		public override bool ShouldStartLoad(UIWebView webView, NSUrlRequest request, UIWebViewNavigationType navigationType)
-		{
-			// TODO: add Settings.Current.UserSettings.OpenInSafari 
-			
-		    if (navigationType == UIWebViewNavigationType.LinkClicked)
-		    {
-		        UIApplication.SharedApplication.OpenUrl(request.Url);
-		        return false;
-		    }
-
-		    return true;
-		}
-
-		public override void LoadingFinished(UIWebView webView)
-		{
-			UIView.BeginAnimations("webview");
-			webView.Alpha = 1;
-			UIView.CommitAnimations();
 		}
 	}
 }

@@ -152,6 +152,7 @@ namespace ReallySimple.FetchService
 			try
 			{
 				string xml = LoadXml(feed.Url);
+				
 				using (StringReader reader = new StringReader(xml))
 				{
 					XDocument doc = XDocument.Load(reader);
@@ -182,16 +183,9 @@ namespace ReallySimple.FetchService
 		private string LoadXml(string url)
 		{
 			WebClient client = new WebClient();
+			client.Encoding = Encoding.UTF8;
 			client.Headers.Add("user-agent", "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
-			string xml = client.DownloadString(url);
-
-			// TODO: a better fix for this
-			xml = xml.Replace("‘", "'");
-			xml = xml.Replace("’", "'");
-			xml = xml.Replace("“", "\"");
-			xml = xml.Replace("”", "\"");
-
-			return xml;
+			return client.DownloadString(url);
 		}
 
 		private List<Item> FillList(IEnumerable<XElement> elements, Feed feed, FeedType feedType)
@@ -297,10 +291,12 @@ namespace ReallySimple.FetchService
 		private string CleanTitle(string title)
 		{
 			title = title.Trim();
-			title = title.Replace("&#8217;", "'");
-			title = title.Replace("&#8220;", "\"");
-			title = title.Replace("&#8221;", "\"");
-			title = title.Replace("&#8217;", "'");
+
+			// This may need to be used
+			//title = title.Replace("‘", "'");
+			//title = title.Replace("’", "'");
+			//title = title.Replace("“", "\"");
+			//title = title.Replace("”", "\"");
 
 			return title;
 		}

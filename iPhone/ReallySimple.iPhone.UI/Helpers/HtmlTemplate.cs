@@ -10,6 +10,7 @@ namespace ReallySimple.iPhone.UI
 	{
 		public static string MainTemplate { get; private set; }
 		public static string EmptyTemplate { get; private set; }
+		public static string InformationTemplate { get; private set; }
 		
 		/// <summary>
 		/// Reads all three embedded resource HTML templates from the assembly.
@@ -28,6 +29,18 @@ namespace ReallySimple.iPhone.UI
 				using (StreamReader reader = new StreamReader(stream))
 				{
 					EmptyTemplate = reader.ReadToEnd();
+				}
+
+				stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("ReallySimple.iPhone.UI.Assets.HTML.information.html");
+				using (StreamReader reader = new StreamReader(stream))
+				{
+					InformationTemplate = reader.ReadToEnd();
+
+					// Fix image paths in the HTML
+					string logoPath = Path.Combine(Environment.CurrentDirectory, "/Assets/Images/informationlogo.png");
+					string bgPath = Path.Combine(Environment.CurrentDirectory, "/Assets/Images/defaultbg.png");
+					InformationTemplate = InformationTemplate.Replace("informationlogo.png", logoPath);
+					InformationTemplate = InformationTemplate.Replace("defaultbg.png", bgPath);
 				}
 			}
 			catch (IOException e)
