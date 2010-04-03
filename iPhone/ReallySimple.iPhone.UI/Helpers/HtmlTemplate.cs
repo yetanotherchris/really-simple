@@ -37,10 +37,8 @@ namespace ReallySimple.iPhone.UI
 					InformationTemplate = reader.ReadToEnd();
 
 					// Fix image paths in the HTML
-					string logoPath = Path.Combine(Environment.CurrentDirectory, "/Assets/Images/informationlogo.png");
-					string bgPath = Path.Combine(Environment.CurrentDirectory, "/Assets/Images/defaultbg.png");
+					string logoPath = string.Format("{0}/{1}",Environment.CurrentDirectory, "/Assets/Images/informationlogo.png");
 					InformationTemplate = InformationTemplate.Replace("informationlogo.png", logoPath);
-					InformationTemplate = InformationTemplate.Replace("defaultbg.png", bgPath);
 				}
 			}
 			catch (IOException e)

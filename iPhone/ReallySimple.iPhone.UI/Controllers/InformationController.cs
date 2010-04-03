@@ -24,9 +24,16 @@ namespace ReallySimple.iPhone.UI.Controllers
 		{
 			Title = "Information";
 			base.ViewDidLoad ();
+			
+			UIImageView imageView = new UIImageView();
+			imageView.Image = UIImage.FromFile("Assets/Images/defaultbg.png");
+			imageView.Frame = new System.Drawing.RectangleF(0,0,320,480);
+			View.AddSubview(imageView);
 
 			_webView = new UIWebView();
 			_webView.Alpha = 0; // no white flashing
+			_webView.BackgroundColor = UIColor.Clear;
+			_webView.Opaque = false;
 			_webView.Delegate = new DefaultWebDelegate();
 			_webView.Frame = new System.Drawing.RectangleF(0, 0, 320, 480);
 			_webView.LoadHtmlString(HtmlTemplate.InformationTemplate, new NSUrl("/"));

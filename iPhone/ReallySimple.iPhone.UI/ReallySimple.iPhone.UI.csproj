@@ -126,6 +126,54 @@
     </Reference>
     <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Libraries\MonoTouch.Dialog\bin\iPhoneSimulator\Release\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Libraries\MonoTouch.Dialog\bin\iPhoneSimulator\Release\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Libraries\MonoTouch.Dialog\bin\iPhoneSimulator\Release\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Libraries\MonoTouch.Dialog\bin\iPhoneSimulator\Release\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Libraries\MonoTouch.Dialog\bin\iPhoneSimulator\Release\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Libraries\MonoTouch.Dialog\bin\iPhoneSimulator\Release\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ReallySimple.iPhone.Core\lib\MonoTouch.Dialog.dll</HintPath>
     </Reference>
   </ItemGroup>
@@ -144,6 +192,7 @@
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Views\LoadingFeedsView.cs" />
     <Compile Include="Controllers\SplashScreenController.cs" />
+    <Compile Include="Views\DefaultWebDelegate.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -171,6 +220,8 @@
     <None Include="Assets\PSDs\Categories.psd" />
     <None Include="dist.plist" />
     <None Include="lib\MonoTouch.Dialog.dll" />
+    <None Include="Assets\PSDs\information-logo.psd" />
+    <None Include="Assets\PSDs\logo-big.psd" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Images\Toolbar\choosefeeds.png">
@@ -201,10 +252,14 @@
     <Content Include="lib\HtmlAgilityMT.dll" />
     <Content Include="lib\HtmlAgilityMT.XML" />
     <Content Include="Assets\Feeds.db" />
+    <Content Include="Assets\Images\informationlogo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\HTML\template.html" />
     <EmbeddedResource Include="Assets\HTML\empty-template.html" />
+    <EmbeddedResource Include="Assets\HTML\information.html" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ReallySimple.iPhone.Core\ReallySimple.iPhone.Core.csproj">
