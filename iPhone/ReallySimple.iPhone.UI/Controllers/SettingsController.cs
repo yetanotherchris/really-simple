@@ -182,12 +182,19 @@ namespace ReallySimple.iPhone.UI.Controllers
 			return builder.ToString();
 		}
 
-		void HandleMailFinished(object sender, MFComposeResultEventArgs e)
+		private void HandleMailFinished(object sender, MFComposeResultEventArgs e)
 		{
-			if (e.Result == MFMailComposeResult.Sent)
-				ModalDialog.Alert("Your email was sent", "");
+			try
+			{
+				if (e.Result == MFMailComposeResult.Sent)
+					ModalDialog.Alert("Your email was sent", "");
 
-			e.Controller.DismissModalViewControllerAnimated(true);
+				e.Controller.DismissModalViewControllerAnimated(true);
+			}
+			catch (Exception ex)
+			{
+				Logger.Warn("Unhandled error when calling DismissModalViewControllerAnimated: {0}", ex);
+			}
 		}
 	}
 }

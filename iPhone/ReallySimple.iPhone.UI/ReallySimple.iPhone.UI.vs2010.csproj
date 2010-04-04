@@ -131,6 +131,7 @@
     <Compile Include="Controllers\PickCategoriesController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Views\LoadingFeedsView.cs" />
+    <Compile Include="Views\DefaultWebDelegate.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -151,6 +152,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\PSDs\information-logo.psd" />
+    <None Include="Assets\PSDs\logo-big.psd" />
     <None Include="Entitlements.plist" />
     <None Include="Assets\Images\appicon.png" />
     <None Include="Assets\PSDs\Loading.psd" />
@@ -160,6 +163,10 @@
     <None Include="lib\MonoTouch.Dialog.dll" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Assets\HTML\information.html" />
+    <Content Include="Assets\Images\informationlogo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\Images\Toolbar\choosefeeds.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -184,7 +191,6 @@
     <Content Include="Assets\Images\defaultbg.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Images\splashscreen.png" />
     <Content Include="Default.png" />
     <Content Include="lib\HtmlAgilityMT.dll" />
     <Content Include="lib\HtmlAgilityMT.XML" />
