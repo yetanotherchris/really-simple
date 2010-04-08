@@ -79,12 +79,12 @@ namespace ReallySimple.iPhone.UI.Controllers
 			{
 				StartupLoader loader = new StartupLoader();
 				loader.InitializeDatabase();
+				loader.ClearOldItems();
 				loader.LoadSettings();
 				loader.LoadCategories();
 				loader.LoadItems();
 				loader.LoadSites();
 				loader.LoadHtmlTemplates();
-				loader.ClearOldItems();
 				
 				// Fade out container view
 				InvokeOnMainThread(delegate
