@@ -120,6 +120,7 @@
   <ItemGroup>
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Application.cs" />
+    <Compile Include="Controllers\SplashScreenController.cs" />
     <Compile Include="Helpers\StartupLoader.cs" />
     <Compile Include="Views\CategoryButton.cs" />
     <Compile Include="Views\ModalDialog.cs" />
