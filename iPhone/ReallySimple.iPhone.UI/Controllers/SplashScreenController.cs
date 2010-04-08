@@ -81,6 +81,7 @@ namespace ReallySimple.iPhone.UI.Controllers
 				loader.InitializeDatabase();
 				loader.ClearOldItems();
 				loader.LoadSettings();
+				loader.LoadMonoTouchDialog();
 				loader.LoadCategories();
 				loader.LoadItems();
 				loader.LoadSites();

@@ -1,4 +1,3 @@
-#define LOGGING
 using System;
 using System.Reflection;
 using System.Diagnostics;
@@ -6,21 +5,22 @@ using System.IO;
 
 namespace ReallySimple.iPhone.Core
 {
+#if LOGGING
 	/// <summary>
 	/// A basic logging class.
 	/// </summary>
 	public class Logger
 	{
+
 		static Logger()
 		{
-#if LOGGING
+
 			try	
 			{
 				if (File.Exists(Settings.Current.LogFile))
 					File.Delete(Settings.Current.LogFile);
 			}
 			catch {}
-#endif
 		}
 		
 		public static void Info(string format, params object[] args)
@@ -43,7 +43,6 @@ namespace ReallySimple.iPhone.Core
 		/// </summary>
 		public static void WriteLine(LoggingLevel level,string format, params object[] args)
 		{
-#if LOGGING
 			var name = new StackFrame(2,false).GetMethod().Name;
 
 			string prefix = string.Format("[{0} - {1}] ",level,name);
@@ -53,7 +52,6 @@ namespace ReallySimple.iPhone.Core
 
 			//if (level != LoggingLevel.Info)
 				WriteToFile(message);
-#endif
 		}
 
 		private static void WriteToFile(string message)
@@ -67,6 +65,15 @@ namespace ReallySimple.iPhone.Core
 			}
 		}
 	}
+#else
+	public class Logger
+	{
+		public static void Info(string format, params object[] args) {}
+		public static void Warn(string format, params object[] args) { }
+		public static void Fatal(string format, params object[] args) {}
+		public static void WriteLine(LoggingLevel level, string format, params object[] args) {}
+	}
+#endif
 
 	public enum LoggingLevel
 	{

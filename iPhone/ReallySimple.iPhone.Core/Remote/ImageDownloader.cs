@@ -115,7 +115,7 @@ namespace ReallySimple.iPhone.Core
 		}
 
 		/// <summary>
-		/// Synchronously downloads the first 7 images for each selected category, using Settings.Current.LastCategories.
+		/// Synchronously downloads the first 5 images for each selected category, using Settings.Current.LastCategories.
 		/// </summary>
 		public void PreDownloadForCategories()
 		{

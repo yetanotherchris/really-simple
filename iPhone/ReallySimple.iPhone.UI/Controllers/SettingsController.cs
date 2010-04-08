@@ -78,7 +78,9 @@ namespace ReallySimple.iPhone.UI.Controllers
 			NavigationItem.SetLeftBarButtonItem(_clearButton,false);
 			NavigationItem.SetRightBarButtonItem(_doneButton, false);
 
-			AddSettingsButtons();
+#if LOGGING
+			AddDebugButtons();
+#endif
 		}
 
 		public override void ViewWillDisappear(bool animated)
@@ -101,7 +103,7 @@ namespace ReallySimple.iPhone.UI.Controllers
 			Settings.Current.LastControllerId = "Settings";
 		}
 
-		private void AddSettingsButtons()
+		private void AddDebugButtons()
 		{
 			_containerView = new UIView();
 			_containerView.Frame = new RectangleF(10, 280, 300, 100);

@@ -6,6 +6,7 @@ using ReallySimple.Core;
 using System.Diagnostics;
 using System.IO;
 using ReallySimple.iPhone.Core;
+using MonoTouch.Dialog;
 
 namespace ReallySimple.iPhone.UI
 {
@@ -47,6 +48,17 @@ namespace ReallySimple.iPhone.UI
 			
 			stopwatch.Stop();
 			Logger.Info("StartupLoader.LoadSettings took {0}ms",stopwatch.ElapsedMilliseconds);
+		}
+
+		public void LoadMonoTouchDialog()
+		{
+			Stopwatch stopwatch = new Stopwatch();
+			stopwatch.Start();
+
+			var bc = new BindingContext(this, Settings.Current.UserSettings, "Settings");
+
+			stopwatch.Stop();
+			Logger.Info("StartupLoader.LoadMonoTouchDialog took {0}ms", stopwatch.ElapsedMilliseconds);
 		}
 
 		public void LoadCategories()

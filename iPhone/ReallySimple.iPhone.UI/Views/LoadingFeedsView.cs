@@ -123,7 +123,8 @@ namespace ReallySimple.iPhone.UI.Controllers
 			UpdateProgressAmount(progress);
 
 			// Change the label text
-			UpdateTitleText(string.Format("Getting the latest feeds\nDownloaded {0}/{1} images\n\n", _saveCount,ImageDownloader.Current.NewImageCount));
+			if (_saveCount <= ImageDownloader.Current.NewImageCount)
+				UpdateTitleText(string.Format("Getting the latest feeds\nDownloaded {0}/{1} images\n\n", _saveCount,ImageDownloader.Current.NewImageCount));
 		}
 
 		private void Stop()
