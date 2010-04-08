@@ -4,10 +4,9 @@
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="ReallySimple.iPhone.UI" expanded="True">
-            <Node name="Controllers" expanded="True">
-              <Node name="PickCategoriesController.cs" selected="True" />
-            </Node>
+          <Node name="ReallySimple.iPhone.Core" expanded="True" />
+          <Node name="ReallySimple.iPhone.UI" expanded="True" selected="True">
+            <Node name="References" expanded="True" />
           </Node>
         </State>
       </Pad>
