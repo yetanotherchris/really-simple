@@ -62,6 +62,7 @@
     <MtouchLink>None</MtouchLink>
     <CodesignKey>iPhone Developer</CodesignKey>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <DefineConstants>LOGGING</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Extensions.cs" />

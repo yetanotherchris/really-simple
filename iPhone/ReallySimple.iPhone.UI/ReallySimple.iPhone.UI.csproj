@@ -99,6 +99,7 @@
     <MtouchI18n />
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodesignProvision>0E94BF61-3CC9-45CE-83B8-895AB29FC271</CodesignProvision>
+    <DefineConstants>LOGGING</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyName>ReallySimple.iPhone.UI</AssemblyName>
@@ -108,6 +109,70 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Libraries\MonoTouch.Dialog\bin\iPhoneSimulator\Release\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Libraries\MonoTouch.Dialog\bin\iPhoneSimulator\Release\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Libraries\MonoTouch.Dialog\bin\iPhoneSimulator\Release\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Libraries\MonoTouch.Dialog\bin\iPhoneSimulator\Release\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Libraries\MonoTouch.Dialog\bin\iPhoneSimulator\Release\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Libraries\MonoTouch.Dialog\bin\iPhoneSimulator\Release\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Libraries\MonoTouch.Dialog\bin\iPhoneSimulator\Release\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Libraries\MonoTouch.Dialog\bin\iPhoneSimulator\Release\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\MonoTouch.Dialog.dll</HintPath>
+    </Reference>
     <Reference Include="MonoTouch.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Libraries\MonoTouch.Dialog\bin\iPhoneSimulator\Release\MonoTouch.Dialog.dll</HintPath>
