@@ -76,7 +76,7 @@ namespace ReallySimple.FetchService
 			}
 			catch (SqlException e)
 			{
-				Logger.WriteLine("A SqlException occured saving '{0}' to the database:\n\n{1}", item.Link, e);
+				Logger.Warn("A SqlException occured saving '{0}' to the database:\n\n{1}", item.Link, e);
 			}
 		}
 
@@ -122,7 +122,7 @@ namespace ReallySimple.FetchService
 			}
 			catch (SqlException e)
 			{
-				Logger.WriteLine("A SqlException occured getting AllFeeds from the database:\n\n{0}", e);
+				Logger.Warn("A SqlException occured getting AllFeeds from the database:\n\n{0}", e);
 			}
 
 			return list;
@@ -152,7 +152,7 @@ namespace ReallySimple.FetchService
 			}
 			catch (SqlException e)
 			{
-				Logger.WriteLine("A SqlException occured with ClearOldItems:\n\n{0}", e);
+				Logger.Warn("A SqlException occured with ClearOldItems:\n\n{0}", e);
 			}
 		}
 
@@ -199,7 +199,7 @@ namespace ReallySimple.FetchService
 			}
 			catch (SqlException e)
 			{
-				Logger.WriteLine("A SqlException occured getting ItemsForPast from the database:\n\n{0}", e);
+				Logger.Warn("A SqlException occured getting ItemsForPast from the database:\n\n{0}", e);
 			}
 
 			return list;
@@ -245,7 +245,7 @@ namespace ReallySimple.FetchService
 			}
 			catch (SqlException e)
 			{
-				Logger.WriteLine("A SqlException occured getting AllItems from the database:\n\n{0}", e);
+				Logger.Warn("A SqlException occured getting AllItems from the database:\n\n{0}", e);
 			}
 
 			return list;

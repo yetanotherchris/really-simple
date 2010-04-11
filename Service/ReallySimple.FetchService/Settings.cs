@@ -22,10 +22,20 @@ namespace ReallySimple.FetchService
 		public int MaximumItemsPerFeed { get; private set; }
 		public string ConnectionString { get; private set; }
 
-		public Settings(int maximumItemsPerFeed,string connectionString)
+		public bool WebMode { get; set; }
+		public string FtpHost { get; private set; }
+		public string FtpUsername { get; private set; }
+		public string FtpPassword { get; private set; }
+
+		public Settings(int maximumItemsPerFeed,string connectionString,bool webMode, string ftpHost,string ftpUsername,string ftpPassword)
 		{
 			MaximumItemsPerFeed = maximumItemsPerFeed;
 			ConnectionString = connectionString;
+
+			WebMode = webMode;
+			FtpHost = ftpHost;
+			FtpUsername = ftpUsername;
+			FtpPassword = ftpPassword;
 		}
 	}
 }

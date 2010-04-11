@@ -10,8 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ReallySimple.FetchService</RootNamespace>
     <AssemblyName>ReallySimple.FetchService</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -81,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="lib\HtmlAgilityPack.dll" />
+    <None Include="EC2\csmallkey.pem" />
     <None Include="lib\HtmlAgilityPack.XML" />
     <Content Include="lib\log4net.dll" />
     <None Include="lib\log4net.xml" />

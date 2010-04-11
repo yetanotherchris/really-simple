@@ -81,7 +81,7 @@ namespace ReallySimple.FetchService
 			}
 			catch (Exception e)
 			{
-				Logger.WriteLine("An Exception occured with FeedFetcher.Parse:\n\n{0}", e);
+				Logger.Info("An Exception occured with FeedFetcher.Parse:\n\n{0}", e);
 				return new List<Item>();
 			}
 		}
@@ -110,7 +110,7 @@ namespace ReallySimple.FetchService
 			}
 			catch (Exception e)
 			{
-				Logger.WriteLine("An error occured with FeedFetcher.ParseAtom '{0}':\n\n{1}", feed.Url, e);
+				Logger.Info("An error occured with FeedFetcher.ParseAtom '{0}':\n\n{1}", feed.Url, e);
 				return new List<Item>();
 			}
 		}
@@ -139,7 +139,7 @@ namespace ReallySimple.FetchService
 			}
 			catch (Exception e)
 			{
-				Logger.WriteLine("An error occured with FeedFetcher.ParseRss '{0}':\n\n{1}", feed.Url, e);
+				Logger.Info("An error occured with FeedFetcher.ParseRss '{0}':\n\n{1}", feed.Url, e);
 				return new List<Item>();
 			}
 		}
@@ -170,7 +170,7 @@ namespace ReallySimple.FetchService
 			}
 			catch (Exception e)
 			{
-				Logger.WriteLine("An error occured with FeedFetcher.ParseRdf '{0}':\n\n{1}", feed.Url, e);
+				Logger.Info("An error occured with FeedFetcher.ParseRdf '{0}':\n\n{1}", feed.Url, e);
 				return new List<Item>();
 			}
 		}
@@ -252,7 +252,7 @@ namespace ReallySimple.FetchService
 					}
 					else
 					{
-						Logger.WriteLine("Warning: {0} is set as {1} but no pubDate/date element was found for the PublishDate.", feed.Url, feed.FeedType);
+						Logger.Info("Warning: {0} is set as {1} but no pubDate/date element was found for the PublishDate.", feed.Url, feed.FeedType);
 					}
 				}
 

@@ -1,15 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using ReallySimple.Core;
-using System.Diagnostics;
 using System.Xml.Serialization;
 using System.IO;
 using System.IO.Compression;
-using System.Data.SqlClient;
-using log4net.Repository.Hierarchy;
-using log4net;
+using System.Net;
 
 namespace ReallySimple.FetchService
 {
@@ -30,32 +25,67 @@ namespace ReallySimple.FetchService
 
 		public void Update()
 		{
-			BasicRepository.ConnectionString = _settings.ConnectionString;
-			FetchNewFeeds();
+			try
+			{
+				BasicRepository.ConnectionString = _settings.ConnectionString;
+				FetchNewFeeds();
 
-			// Last 3 hours
-			List<Item> items = BasicRepository.ItemsForPast(3);
-			SaveToDisk(items, "3.bin.gz");
+				// Last 3 hours
+				List<Item> items = BasicRepository.ItemsForPast(3);
+				SaveToDisk(items, "3.bin.gz");
 
-			// Last 6 hours
-			items = BasicRepository.ItemsForPast(6);
-			SaveToDisk(items, "6.bin.gz");
+				// Last 6 hours
+				items = BasicRepository.ItemsForPast(6);
+				SaveToDisk(items, "6.bin.gz");
 
-			// Last 12 hours
-			items = BasicRepository.ItemsForPast(12);
-			SaveToDisk(items, "12.bin.gz");
+				// Last 12 hours
+				items = BasicRepository.ItemsForPast(12);
+				SaveToDisk(items, "12.bin.gz");
 
-			// Last 24 hours. 
-			// Saturdays and sundays have very low postings so if the application is used on these days the user will get no news - 
-			// account for this by simply giving them Friday's.
-			int hours = 24;
-			if (DateTime.UtcNow.DayOfWeek == DayOfWeek.Saturday)
-				hours = 48;
-			else if (DateTime.UtcNow.DayOfWeek == DayOfWeek.Sunday)
-				hours = 72;
+				// Last 24 hours. 
+				// Saturdays and sundays have very low postings so if the application is used on these days the user will get no news - 
+				// account for this by simply giving them Friday's.
+				int hours = 24;
+				if (DateTime.UtcNow.DayOfWeek == DayOfWeek.Saturday)
+					hours = 48;
+				else if (DateTime.UtcNow.DayOfWeek == DayOfWeek.Sunday)
+					hours = 72;
 
-			items = BasicRepository.ItemsForPast(hours);
-			SaveToDisk(items, "24.bin.gz");
+				items = BasicRepository.ItemsForPast(hours);
+				SaveToDisk(items, "24.bin.gz");
+
+				// FTP
+				if (!_settings.WebMode)
+				{
+					FtpFile("3.bin.gz");
+					FtpFile("6.bin.gz");
+					FtpFile("12.bin.gz");
+					FtpFile("24.bin.gz");
+				}
+			}
+			catch (Exception e)
+			{
+				Logger.Fatal("Exception occured in Update: \n{0}", e);
+			}
+		}
+
+		private void FtpFile(string filename)
+		{
+			string ftpFilename = string.Format("{0}/{1}", _settings.FtpHost, filename);
+
+			FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpFilename);
+			request.Credentials = new NetworkCredential(_settings.FtpUsername, _settings.FtpPassword);
+			request.Method = WebRequestMethods.Ftp.UploadFile;
+			request.UseBinary = true;
+
+			// 3.bin.gz
+			byte[] contents = File.ReadAllBytes(filename);
+			using (Stream stream = request.GetRequestStream())
+			{
+				stream.Write(contents, 0, contents.Length);
+			}
+			FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+			Logger.Info("FTP status for {0}: {1}{2}", ftpFilename, response.StatusCode, response.StatusDescription);
 		}
 
 		private void FetchNewFeeds()
@@ -86,7 +116,7 @@ namespace ReallySimple.FetchService
 				BasicRepository.SaveItem(item);
 			}
 
-			Logger.WriteLine("Saved {0} new items to the database", newItems.Count);
+			Logger.Info("Saved {0} new items to the database", newItems.Count);
 		}
 
 		private void SaveToDisk(List<Item> items,string filename)
@@ -101,6 +131,9 @@ namespace ReallySimple.FetchService
 					item.Feed.Id = id;
 					item.Feed.FeedType = FeedType.RSS;
 				}
+
+				if (_settings.WebMode)
+					filename = string.Format("{0}/{1}", AppDomain.CurrentDomain.BaseDirectory, filename);
 
 				using (MemoryStream memoryStream = new MemoryStream())
 				{
@@ -119,7 +152,7 @@ namespace ReallySimple.FetchService
 			}
 			catch (IOException e)
 			{
-				Logger.WriteLine("An error occured saving '{0}' to disk:\n\n{1}", filename, e);
+				Logger.Fatal("An error occured saving '{0}' to disk:\n\n{1}", filename, e);
 			}
 		}
 	}

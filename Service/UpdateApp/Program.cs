@@ -8,6 +8,7 @@ using System.Configuration;
 using log4net;
 using log4net.Config;
 using System.Diagnostics;
+using System.IO;
 
 namespace Update
 {
@@ -15,35 +16,19 @@ namespace Update
 	{
 		static void Main(string[] args)
 		{
-			if (args.Length == 0)
-			{
-				ProcessStartInfo info = new ProcessStartInfo(@"C:\ReallySimple-Updater\Update.exe", "launch");
-				info.CreateNoWindow = true;
-				info.WindowStyle = ProcessWindowStyle.Hidden;
-				Process process = Process.Start(info);
-			}
-			else if (args[0] == "launch")
-			{
-				ProcessStartInfo info = new ProcessStartInfo(@"C:\ReallySimple-Updater\Update.exe","update");
-				info.CreateNoWindow = true;
-				info.WindowStyle = ProcessWindowStyle.Hidden;
-				Process process = Process.Start(info);
-				process.WaitForExit();
+			string path = ConfigurationManager.AppSettings["binarypath"];
+			string exePath = Path.Combine(path, "Update.exe");
+			
+			string connection = ConfigurationManager.ConnectionStrings["default"].ConnectionString;
+			string ftpHost = ConfigurationManager.AppSettings["ftp-host"];
+			string ftpUsername = ConfigurationManager.AppSettings["ftp-username"];
+			string ftpPassword = ConfigurationManager.AppSettings["ftp-password"];
+			
+			Settings settings = new Settings(5,connection,false,ftpHost,ftpUsername,ftpPassword);
 
-				info = new ProcessStartInfo(@"ftp.exe", @"-s:C:\ReallySimple-Updater\ftp.txt");
-				info.CreateNoWindow = true;
-				info.WindowStyle = ProcessWindowStyle.Hidden;
-				process = Process.Start(info);
-				process.WaitForExit();
-			}
-			else if (args[0] == "update")
-			{
-				Settings settings = new Settings(5, ConfigurationManager.ConnectionStrings["local"].ConnectionString);
-
-				FeedUpdater updater = new FeedUpdater(settings);
-				updater.ClearOldItems();
-				updater.Update();
-			}
+			FeedUpdater updater = new FeedUpdater(settings);
+			updater.ClearOldItems();
+			updater.Update();
 		}
 	}
 }
