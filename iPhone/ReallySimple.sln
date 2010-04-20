@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReallySimple.iPhone.Core", "ReallySimple.iPhone.Core\ReallySimple.iPhone.Core.csproj", "{F9B60024-784E-49F3-BC71-15B9B63CA0F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReallySimple.iPhone.UI", "ReallySimple.iPhone.UI\ReallySimple.iPhone.UI.csproj", "{776A4058-74E4-4DE9-832A-285B6FD31C23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReallySimple.Core", "..\ReallySimple.Core\ReallySimple.Core.csproj", "{0DBE9606-0273-4E18-9F98-4DD60F640DCD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhone = Debug|iPhone
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhone = Release|iPhone
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0DBE9606-0273-4E18-9F98-4DD60F640DCD}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{0DBE9606-0273-4E18-9F98-4DD60F640DCD}.Debug|iPhone.Build.0 = Debug|iPhone
+		{0DBE9606-0273-4E18-9F98-4DD60F640DCD}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{0DBE9606-0273-4E18-9F98-4DD60F640DCD}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{0DBE9606-0273-4E18-9F98-4DD60F640DCD}.Release|iPhone.ActiveCfg = Release|iPhone
+		{0DBE9606-0273-4E18-9F98-4DD60F640DCD}.Release|iPhone.Build.0 = Release|iPhone
+		{0DBE9606-0273-4E18-9F98-4DD60F640DCD}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{0DBE9606-0273-4E18-9F98-4DD60F640DCD}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{776A4058-74E4-4DE9-832A-285B6FD31C23}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{776A4058-74E4-4DE9-832A-285B6FD31C23}.Debug|iPhone.Build.0 = Debug|iPhone
+		{776A4058-74E4-4DE9-832A-285B6FD31C23}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{776A4058-74E4-4DE9-832A-285B6FD31C23}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{776A4058-74E4-4DE9-832A-285B6FD31C23}.Release|iPhone.ActiveCfg = Release|iPhone
+		{776A4058-74E4-4DE9-832A-285B6FD31C23}.Release|iPhone.Build.0 = Release|iPhone
+		{776A4058-74E4-4DE9-832A-285B6FD31C23}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{776A4058-74E4-4DE9-832A-285B6FD31C23}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{F9B60024-784E-49F3-BC71-15B9B63CA0F5}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{F9B60024-784E-49F3-BC71-15B9B63CA0F5}.Debug|iPhone.Build.0 = Debug|iPhone
+		{F9B60024-784E-49F3-BC71-15B9B63CA0F5}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{F9B60024-784E-49F3-BC71-15B9B63CA0F5}.Release|iPhone.ActiveCfg = Release|iPhone
+		{F9B60024-784E-49F3-BC71-15B9B63CA0F5}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = ReallySimple.iPhone.UI\ReallySimple.iPhone.UI.csproj
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
