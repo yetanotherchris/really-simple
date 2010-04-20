@@ -23,12 +23,19 @@ namespace Update
 			string ftpHost = ConfigurationManager.AppSettings["ftp-host"];
 			string ftpUsername = ConfigurationManager.AppSettings["ftp-username"];
 			string ftpPassword = ConfigurationManager.AppSettings["ftp-password"];
+			bool isEC2 = Convert.ToBoolean(ConfigurationManager.AppSettings["isEC2"]);
 			
 			Settings settings = new Settings(5,connection,false,ftpHost,ftpUsername,ftpPassword);
 
 			FeedUpdater updater = new FeedUpdater(settings);
 			updater.ClearOldItems();
 			updater.Update();
+
+			// Shutdown the PC
+			if (isEC2)
+			{
+				Process.Start("shutdown", "/s");
+			}
 		}
 	}
 }

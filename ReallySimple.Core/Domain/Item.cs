@@ -53,12 +53,16 @@ namespace ReallySimple.Core
 			if (item == null)
 				return false;
 
-			return item.GetHashCode() == GetHashCode();
+			string titleA = item.Title.ToLower().Replace(" ","");
+			string titleB = Title.ToLower().Replace(" ","");
+
+			return titleA.Equals(titleB);
 		}
 
 		public override int GetHashCode()
 		{
-			return Link.GetHashCode();
+			string title = Title.ToLower().Replace(" ", "");
+			return title.GetHashCode();
 		}
 	}
 }
