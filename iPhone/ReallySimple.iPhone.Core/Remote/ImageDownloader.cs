@@ -7,6 +7,8 @@ using MonoTouch.Foundation;
 using System.IO;
 using ReallySimple.Core;
 using System.Net;
+using MonoTouch.UIKit;
+using System.Drawing;
 
 namespace ReallySimple.iPhone.Core
 {
@@ -256,6 +258,7 @@ namespace ReallySimple.iPhone.Core
 				WebClient client = new WebClient();
 				client.DownloadFile(item.ImageUrl, fullPath);
 
+				ResizeImage(fullPath);
 				item.SetImageDownloaded();
 				Logger.Info("Saved image {0}", Path.GetFileName(item.ImageFilename));
 			}
@@ -280,6 +283,53 @@ namespace ReallySimple.iPhone.Core
 			string filename = string.Format("{0}/{1}{2}", Settings.Current.ImageCacheFolder, item.Id, extension);
 			return filename;
 		}
+		
+		private void ResizeImage(string filename)
+		{
+			UIImage image = UIImage.FromFileUncached(filename);
+			
+			if (image != null)
+			{
+				try
+				{
+					if (image.Size.Width > 300 && image.Size.Height > 200)
+					{
+						UIImage newImage = Scale(image,new Size(300,200));
+						
+						NSError error;
+						
+						if (Path.GetExtension(filename).ToLower() == "jpg")
+							newImage.AsJPEG().Save(filename,false,out error);
+						else
+							newImage.AsPNG().Save(filename,false,out error);
+						
+						Logger.Info("Resize image saved {0}",filename);
+						
+						if (error != null)
+							Logger.Warn("NSError saving {0}",filename);
+					}
+				}
+				catch (Exception e)
+				{
+					Logger.Warn("Exception resizing {0}: \n{1}",filename,e);
+				}
+			}
+		}
+		
+		private UIImage Scale(UIImage source, SizeF newSize)
+		{
+			UIGraphics.BeginImageContext (newSize);
+			var context = UIGraphics.GetCurrentContext ();
+			context.TranslateCTM (0, newSize.Height);
+			context.ScaleCTM (1f, -1f);
+			
+			context.DrawImage (new RectangleF (0, 0, newSize.Width, newSize.Height), source.CGImage);
+			
+			var scaledImage = UIGraphics.GetImageFromCurrentImageContext();
+			UIGraphics.EndImageContext();
+			
+			return scaledImage;         
+		}		
 
 		private class ThreadInfo
 		{

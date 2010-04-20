@@ -123,7 +123,7 @@ namespace ReallySimple.iPhone.Core.Remote
 		public void SaveItems(List<Item> newItems)
 		{
 			// There may be zero items, so only call this once to avoid 300+ select queries when the cache is empty.
-			IList<Item> allItems = Repository.Default.ListItems();
+			List<Item> allItems = Repository.Default.ListItems().ToList();
 
 			using (SqliteConnection connection = new SqliteConnection(Repository.Default.ItemsConnectionString))
 			{
@@ -134,16 +134,27 @@ namespace ReallySimple.iPhone.Core.Remote
 				// Perform the inserts inside a transaction to avoid the journal file being constantly opened + closed.
 				using (SqliteTransaction transaction = connection.BeginTransaction())
 				{
-					
 					SqliteCommand command = new SqliteCommand(connection);
 					command.Transaction = transaction;
+					
+					List<Item> addItems = new List<Item>();
+					bool hasItems = allItems.Count > 0;
 
 					foreach (Item item in newItems)
 					{
+//						if (hasItems)
+//						{
+//							
+//						}
+//						else
+//						{
+//							
+//						}
 						// Check for duplicates in memory
-						if (!allItems.Any(i => i.Equals(item)))
+						if (!addItems.Any(i => i.Equals(item)) && !allItems.Any(i => i.Equals(item)))
 						{
 							repository.SaveItemForTransaction(command, item);
+							addItems.Add(item);
 						}
 
 						OnFeedSaved(EventArgs.Empty);

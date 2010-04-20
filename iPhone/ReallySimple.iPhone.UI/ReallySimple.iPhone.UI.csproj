@@ -11,7 +11,7 @@
     <RootNamespace>ReallySimple.iPhone.UI</RootNamespace>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <BundleIcon>Assets\Images\appicon.png</BundleIcon>
-    <BundleVersion>1.0.0</BundleVersion>
+    <BundleVersion>1.0.1</BundleVersion>
     <BundleIdentifier>com.rlysimple.iphone</BundleIdentifier>
     <BundleDisplayName>Really Simple</BundleDisplayName>
     <FileUpgradeFlags>
@@ -99,7 +99,6 @@
     <MtouchI18n />
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodesignProvision>0E94BF61-3CC9-45CE-83B8-895AB29FC271</CodesignProvision>
-    <DefineConstants>LOGGING</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyName>ReallySimple.iPhone.UI</AssemblyName>

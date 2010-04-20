@@ -329,9 +329,6 @@ namespace ReallySimple.iPhone.UI.Controllers
 				_nextButton.Enabled = false;
 			else if (_itemsForSelectedCategories.Count > 0)
 				_nextButton.Enabled = true;
-
-			// Try to stop the UIWebView gobbling memory
-			GC.Collect();
 		}
 		
 		/// <summary>

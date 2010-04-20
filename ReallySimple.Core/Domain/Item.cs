@@ -52,17 +52,13 @@ namespace ReallySimple.Core
 			Item item = obj as Item;
 			if (item == null)
 				return false;
-
-			string titleA = item.Title.ToLower().Replace(" ","");
-			string titleB = Title.ToLower().Replace(" ","");
-
-			return titleA.Equals(titleB);
+			
+			return Title.Equals(item.Title);
 		}
 
 		public override int GetHashCode()
 		{
-			string title = Title.ToLower().Replace(" ", "");
-			return title.GetHashCode();
+			return Title.GetHashCode();
 		}
 	}
 }

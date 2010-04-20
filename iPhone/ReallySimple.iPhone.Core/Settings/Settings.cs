@@ -94,7 +94,7 @@ namespace ReallySimple.iPhone.Core
 		/// </summary>
 		public string Version
 		{
-			get { return Assembly.GetExecutingAssembly().GetName().Version.ToString(); }
+			get { return "1.0.1"; }
 		}
 
 		/// <summary>
@@ -230,6 +230,14 @@ namespace ReallySimple.iPhone.Core
 					UserSettings.SortItemsBy = SortBy.Date;
 				else
 					UserSettings.SortItemsBy = (SortBy)sortby;
+				
+				// Version - if it doesn't match, wipe the database and images.
+				string version = defaults.StringForKey("version");
+				if (string.IsNullOrEmpty(version) || version != Version)
+				{
+					LastUpdate = DateTime.Now.AddDays(-1);
+					ClearCache(true);
+				}
 
 				// Others
 				UserSettings.IgnoreReadItems = defaults.BoolForKey("ignorereaditems");
@@ -261,6 +269,9 @@ namespace ReallySimple.iPhone.Core
 				// The last categories
 				var catIds = LastCategories.Select<Category, string>(i => i.Id.ToString());
 				NSUserDefaults.StandardUserDefaults.SetString(string.Join(";", catIds.ToArray()), "lastcategories");
+				
+				// Version
+				NSUserDefaults.StandardUserDefaults.SetString(Version,"version");
 
 				// User configurable settings
 				NSUserDefaults.StandardUserDefaults.SetInt(UserSettings.GetKeepItemsFor(), "keepitemsfor");

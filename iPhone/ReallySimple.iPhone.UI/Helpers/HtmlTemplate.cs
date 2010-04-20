@@ -73,7 +73,7 @@ namespace ReallySimple.iPhone.UI
 				
 				if (imageExists)
 				{
-					imageHtml = string.Format("<br /><div id=\"imagecontainer\"><img src=\"{0}\" width=\"300\" height=\"200\" /></div><br />", filename);	
+					imageHtml = string.Format("<br /><div id=\"imagecontainer\"><img src=\"{0}\" /></div><br />", filename);	
 				}
 			}
 
