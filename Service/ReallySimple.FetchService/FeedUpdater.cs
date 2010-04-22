@@ -32,15 +32,24 @@ namespace ReallySimple.FetchService
 
 				// Last 3 hours
 				List<Item> items = BasicRepository.ItemsForPast(3);
-				SaveToDisk(items, "3.bin.gz");
+				if (_settings.EnableFtp)
+					SaveToDisk(items, "3.bin.gz");
+				else
+					SaveToDisk(items, Path.Combine(_settings.LocalFolder, "3.bin.gz"));
 
 				// Last 6 hours
 				items = BasicRepository.ItemsForPast(6);
-				SaveToDisk(items, "6.bin.gz");
+				if (_settings.EnableFtp)
+					SaveToDisk(items, "6.bin.gz");
+				else
+					SaveToDisk(items, Path.Combine(_settings.LocalFolder, "6.bin.gz"));
 
 				// Last 12 hours
 				items = BasicRepository.ItemsForPast(12);
-				SaveToDisk(items, "12.bin.gz");
+				if (_settings.EnableFtp)
+					SaveToDisk(items, "12.bin.gz");
+				else
+					SaveToDisk(items, Path.Combine(_settings.LocalFolder, "12.bin.gz"));
 
 				// Last 24 hours. 
 				// Saturdays and sundays have very low postings so if the application is used on these days the user will get no news - 
@@ -52,10 +61,13 @@ namespace ReallySimple.FetchService
 					hours = 72;
 
 				items = BasicRepository.ItemsForPast(hours);
-				SaveToDisk(items, "24.bin.gz");
+				if (_settings.EnableFtp)
+					SaveToDisk(items, "24.bin.gz");
+				else
+					SaveToDisk(items, Path.Combine(_settings.LocalFolder, "24.bin.gz"));
 
 				// FTP
-				if (!_settings.WebMode)
+				if (_settings.EnableFtp)
 				{
 					FtpFile("3.bin.gz");
 					FtpFile("6.bin.gz");
@@ -131,9 +143,6 @@ namespace ReallySimple.FetchService
 					item.Feed.Id = id;
 					item.Feed.FeedType = FeedType.RSS;
 				}
-
-				if (_settings.WebMode)
-					filename = string.Format("{0}/{1}", AppDomain.CurrentDomain.BaseDirectory, filename);
 
 				using (MemoryStream memoryStream = new MemoryStream())
 				{

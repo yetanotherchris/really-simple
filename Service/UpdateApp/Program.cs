@@ -20,12 +20,16 @@ namespace Update
 			string exePath = Path.Combine(path, "Update.exe");
 			
 			string connection = ConfigurationManager.ConnectionStrings["default"].ConnectionString;
+			string localpath = ConfigurationManager.AppSettings["localfolder"];
+			bool isEC2 = Convert.ToBoolean(ConfigurationManager.AppSettings["isEC2"]);
+
+			/*
 			string ftpHost = ConfigurationManager.AppSettings["ftp-host"];
 			string ftpUsername = ConfigurationManager.AppSettings["ftp-username"];
 			string ftpPassword = ConfigurationManager.AppSettings["ftp-password"];
-			bool isEC2 = Convert.ToBoolean(ConfigurationManager.AppSettings["isEC2"]);
-			
-			Settings settings = new Settings(5,connection,false,ftpHost,ftpUsername,ftpPassword);
+			 */
+
+			Settings settings = new Settings(5, connection, "", "", "",false, localpath);
 
 			FeedUpdater updater = new FeedUpdater(settings);
 			updater.ClearOldItems();
